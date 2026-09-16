@@ -5,13 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Hengyi Li — mathematics, stochastics and Gaussian diffusions. Theses, course notes and essays.">
   <title>Hengyi Li | Mathematics</title>
-  <link rel="stylesheet" href="assets/css/resume.css?v=ccdb397">
+  <script src="assets/js/color-mode.js?v=2"></script>
+  <script src="assets/js/navigation.js?v=5" defer></script>
+  <script src="assets/js/motion.js?v=1" defer></script>
+  <link rel="stylesheet" href="assets/css/resume.css?v=20260916-21">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="header">
-    <a class="wordmark" href="#main">Hengyi Li<span> / Mathematics</span></a>
+    <div class="current-section"></div>
     <nav aria-label="Main navigation"><a href="#education">Education</a><a href="#research">Research</a><a href="#courses">Coursework</a><a href="files/Hengyi-Li-CV.pdf">CV ↗</a></nav>
+    <button class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" title="Switch to dark mode" hidden><span class="theme-moon" aria-hidden="true">☾</span><span class="theme-sun" aria-hidden="true">☀</span></button>
   </header>
   <main id="main">
     <section class="intro" aria-labelledby="name">
@@ -30,25 +34,25 @@
     <section class="section" id="education">
       <h2>Education</h2>
       <div class="section-body">
-        <article class="entry"><div class="entry-heading"><h3>University of Amsterdam</h3><p class="date">2023 — 2026</p></div><p class="subtitle">MSc Mathematics · Stochastics</p></article>
-        <article class="entry"><div class="entry-heading"><h3>University of Liverpool<br>Xi’an Jiaotong-Liverpool University</h3><p class="date">2019 — 2023</p></div><p class="subtitle">BSc Applied Mathematics</p></article>
-        <article class="entry compact"><div class="entry-heading"><h3>Daqing Experimental Middle School</h3><p class="date">2016 — 2019</p></div><p class="subtitle">High School Diploma</p></article>
+        <article class="entry"><div class="entry-heading"><h3>University of Amsterdam</h3><p class="date">September 2023 — August 2026</p></div><p class="subtitle">MSc Mathematics · Stochastics</p></article>
+        <article class="entry"><div class="entry-heading"><h3>University of Liverpool<br>Xi’an Jiaotong-Liverpool University</h3><p class="date">September 2019 — July 2023</p></div><p class="subtitle">BSc Applied Mathematics</p></article>
+        <article class="entry compact"><div class="entry-heading"><h3>Daqing Experimental Middle School</h3><p class="date">September 2016 — June 2019</p></div><p class="subtitle">High School Diploma</p></article>
       </div>
     </section>
 
     <section class="section" id="research">
       <h2>Research</h2>
       <div class="section-body">
-        <article class="thesis"><div class="eyebrow">Master’s thesis · March — August 2026</div><h3>Accelerating Convergence to Equilibrium in Gaussian Diffusions</h3><p class="subtitle">Supervisor: Dr. S. G. Cox</p><p>Characterised linear diffusions preserving a prescribed Gaussian invariant measure via the Lyapunov equation, and analysed convergence in L²-Wasserstein distance through spectral properties of the drift matrix.</p><p>Compared optimal reversible and non-reversible convergence rates under noise constraints, including explicit low-dimensional constructions and the arbitrary-dimensional optimisation problem. Applied the framework to kinetic Langevin dynamics and examined extensions to strongly convex non-Gaussian potentials.</p><div class="course-resources research-resources"><!-- Replace this placeholder with the uploaded latest thesis PDF link. --><span class="notes-placeholder">LATEST PDF <small>To be uploaded</small></span><a class="notes-placeholder" href="https://dspace.uba.uva.nl/server/api/core/bitstreams/7305e0de-9ef9-4478-8791-238a3e2ffd3a/content">UvA REPOSITORY <span aria-hidden="true">↗</span></a></div></article>
-        <article class="thesis"><div class="eyebrow">Bachelor’s thesis · September 2022 — May 2023</div><h3>Random Walk and Boundary Value Problems</h3><p class="subtitle">Supervisor: Dr. Ye Liu</p><p>Constructed simple random walk models across multiple dimensions to study probability distributions, recurrence and transience, and their applications to boundary value problems.</p><!-- Replace this placeholder with an anchor pointing to the thesis PDF when supplied. --><div class="course-resources research-resources"><span class="notes-placeholder">PDF <small>To be uploaded</small></span></div></article>
+        <article class="thesis"><div class="thesis-heading"><span class="eyebrow">Master’s thesis</span><span class="date">March — August 2026</span></div><details class="research-summary"><summary><h3>Accelerating Convergence to Equilibrium in Gaussian Diffusions</h3></summary><div class="research-description"><p>Characterised linear diffusions preserving a prescribed Gaussian invariant measure via the Lyapunov equation, and analysed convergence in L²-Wasserstein distance through spectral properties of the drift matrix.</p><p>Compared optimal reversible and non-reversible convergence rates under noise constraints, including explicit low-dimensional constructions and the arbitrary-dimensional optimisation problem. Applied the framework to kinetic Langevin dynamics and examined extensions to strongly convex non-Gaussian potentials.</p></div></details><p class="subtitle">Supervisor: Dr. S. G. Cox</p><div class="course-resources research-resources"><!-- Replace this placeholder with the uploaded latest thesis PDF link. --><span class="notes-placeholder">LATEST PDF <small>To be uploaded</small></span><a class="notes-placeholder" href="https://dspace.uba.uva.nl/server/api/core/bitstreams/7305e0de-9ef9-4478-8791-238a3e2ffd3a/content">UvA REPOSITORY <span aria-hidden="true">↗</span></a></div></article>
+        <article class="thesis"><div class="thesis-heading"><span class="eyebrow">Bachelor’s thesis</span><span class="date">September 2022 — May 2023</span></div><details class="research-summary"><summary><h3>Random Walk and Boundary Value Problems</h3></summary><div class="research-description"><p>Constructed simple random walk models across multiple dimensions to study probability distributions, recurrence and transience, and their applications to boundary value problems.</p></div></details><p class="subtitle">Supervisor: Dr. Ye Liu</p><!-- Replace this placeholder with an anchor pointing to the thesis PDF when supplied. --><div class="course-resources research-resources"><span class="notes-placeholder">PDF <small>To be uploaded</small></span></div></article>
       </div>
     </section>
 
     <section class="section" id="courses">
       <h2>Coursework</h2>
       <div class="section-body">
-        <div class="course-group">
-          <h3 class="degree-heading">Master’s courses</h3>
+        <details class="course-group" open>
+          <summary><h3 class="degree-heading">Master’s courses</h3></summary>
           <ul class="course-list">
           <li class="course-row"><h4>Asymptotic Statistics</h4>
             <!-- Replace this placeholder with the course notes PDF link when supplied. -->
@@ -81,9 +85,9 @@
             <!-- Replace this placeholder with the course notes PDF link when supplied. -->
             <div class="course-resources"><span class="notes-placeholder">NOTES <small>To be uploaded</small></span></div><!-- Add notes or project links here when files are available. --></li>
           </ul>
-        </div>
-        <div class="course-group">
-          <h3 class="degree-heading">Bachelor’s courses</h3>
+        </details>
+        <details class="course-group">
+          <summary><h3 class="degree-heading">Bachelor’s courses</h3></summary>
           <ul class="course-list">
           <li class="course-row"><h4>Advanced Linear Algebra</h4></li>
           <li class="course-row"><h4>Complex Functions</h4></li>
@@ -94,7 +98,7 @@
           <li class="course-row"><h4>Ordinary Differential Equations and Control</h4></li>
           <li class="course-row"><h4>Partial Differential Equations</h4></li>
           </ul>
-        </div>
+        </details>
       </div>
     </section>
 
@@ -103,6 +107,7 @@
       <div class="section-body"><dl class="skills"><dt>Tools</dt><dd>Python, MATLAB, Java, Hugin, Microsoft Excel, Adobe After Effects</dd><dt>Languages</dt><dd>Chinese (native), English (language of instruction), Japanese (fluent)</dd><dt>Beyond mathematics</dt><dd>Literature, philosophy, history, painting, cinema and experimental video.</dd></dl></div>
     </section>
   </main>
-  <footer><div class="license">© Hengyi Li · <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></div><a href="#main">Back to top ↑</a></footer>
+  <footer><div class="license">© Hengyi Li · <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></div></footer>
+  <a class="back-to-top" href="#" aria-label="Back to top" title="Back to top"><span aria-hidden="true">↑</span></a>
 </body>
 </html>
