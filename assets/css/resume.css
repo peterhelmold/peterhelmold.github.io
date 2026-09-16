@@ -1,0 +1,77 @@
+:root{color-scheme:light;--paper:#f2f0e9;--ink:#292c2c;--muted:#626765;--accent:#235c7a;--line:#c8cac3;--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:var(--paper);background-image:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(70,65,45,.018) 3px,rgba(70,65,45,.018) 4px);color:var(--ink);font:16px/1.75 var(--sans);-webkit-font-smoothing:antialiased}::selection{background:#cedfe5}a{color:var(--accent);text-underline-offset:5px;text-decoration-thickness:1px}a:hover{text-decoration:underline}a:focus-visible{outline:2px solid var(--accent);outline-offset:5px}.header,main,footer{width:min(1180px,calc(100% - 96px));margin:auto}.header{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:23px 0;border-bottom:1px solid var(--ink)}.header a{text-decoration:none}.header a:hover{color:var(--ink)}.wordmark{display:flex;align-items:center;gap:10px;font:bold 21px var(--serif);color:var(--ink)}.wordmark::before{content:"";width:9px;height:9px;background:var(--accent);margin-right:4px}.wordmark span{font:11px var(--sans);color:var(--muted)}nav{display:flex;gap:26px;font-size:12px}
+.intro{display:grid;grid-template-columns:minmax(0,1fr) 238px;gap:64px;padding:72px 0 66px;align-items:center}.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:10px;font-weight:650;color:var(--accent)}h1,h2,h3,p{margin-top:0}h1{font:normal clamp(60px,8.4vw,110px)/1.07 var(--serif);letter-spacing:-.06em;margin:23px 0 28px}.lead{font:23px/1.6 var(--serif);max-width:640px;margin-bottom:16px}.intro-note{font-size:13px;color:var(--muted)}.contact{display:flex;align-items:center;flex-wrap:wrap;gap:27px;margin-top:29px;font-size:12px}.contact a{text-decoration:none}.contact a:hover{text-decoration:underline}.button{border:1px solid var(--accent);color:var(--accent);padding:10px 16px;display:inline-flex;gap:24px;transition:background .15s,color .15s}.button:hover{background:var(--accent);color:white}.contents{border-left:1px solid var(--line);padding-left:28px}.contents-title{font:25px/1.3 var(--serif);margin:17px 0 22px}.contents ol{list-style:none;margin:0;padding:0}.contents li{border-top:1px solid var(--line)}.contents a{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:9px 0;font-size:11px;text-decoration:none;color:var(--muted)}.contents a:hover{color:var(--accent)}.contents span{font:10px/1.5 monospace;color:var(--accent)}
+.section{display:grid;grid-template-columns:210px minmax(0,1fr);gap:44px;padding:42px 0 46px;border-top:1px solid var(--ink)}h2{position:sticky;top:28px;align-self:start;font:25px/1.25 var(--serif);letter-spacing:-.025em}.number{display:block;font:11px/1.5 monospace;letter-spacing:.08em;color:var(--accent);margin-bottom:13px}.entry{padding-bottom:26px;margin-bottom:26px;border-bottom:1px solid var(--line)}.entry:last-child{padding-bottom:0;margin-bottom:0;border-bottom:0}.entry-heading{display:flex;justify-content:space-between;align-items:baseline;gap:22px}h3{font:bold 20px/1.4 var(--serif);margin-bottom:8px}.date{flex-shrink:0;font:11px/1.7 var(--sans);color:var(--muted);margin-bottom:8px;font-variant-numeric:tabular-nums}.subtitle{font-size:12px;color:var(--accent);margin-bottom:12px}.entry p:not(.subtitle):not(.date),.thesis p:not(.subtitle){font-size:14px;line-height:1.8;color:var(--muted);margin-bottom:12px}.compact .subtitle{margin-bottom:0}.thesis{padding:30px 34px;background:rgba(255,255,255,.35);border:1px solid var(--line);border-top:3px solid var(--accent);margin-bottom:30px;position:relative}.thesis h3{font:normal clamp(29px,3.4vw,43px)/1.16 var(--serif);letter-spacing:-.035em;margin:21px 0 18px;max-width:660px}.thesis .subtitle{padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:20px}.text-link{display:flex;justify-content:space-between;align-items:center;gap:18px;font-size:12px;font-weight:600;padding-top:17px;border-top:1px solid var(--line);margin-top:22px;text-decoration:none}.text-link span{font-size:20px}.skills{margin:0;font-size:14px;display:grid;grid-template-columns:150px 1fr;gap:18px 24px}.skills dt{font-weight:500}.skills dd{margin:0;color:var(--muted)}footer{display:flex;gap:24px;justify-content:space-between;border-top:1px solid var(--ink);padding:24px 0 32px;font-size:11px;color:var(--muted)}footer>span{font-family:var(--serif);font-size:16px;color:var(--ink)}.skip{position:absolute;left:16px;top:-100px;background:white;padding:12px;z-index:10}.skip:focus{top:12px}
+@media(max-width:980px){.header,main,footer{width:calc(100% - 64px)}.intro{gap:36px;grid-template-columns:minmax(0,1fr) 190px}.contents{padding-left:22px}.section{grid-template-columns:155px minmax(0,1fr);gap:28px}.entry-heading{display:block}.date{margin-bottom:8px}.wordmark span{display:none}}
+@media(max-width:680px){.header,main,footer{width:calc(100% - 40px)}.header{align-items:flex-start;flex-direction:column;gap:17px;padding:19px 0}nav{flex-wrap:wrap;gap:24px;font-size:11px}.intro{grid-template-columns:1fr;gap:30px;padding:44px 0 35px}h1{font-size:clamp(60px,15vw,88px);margin:18px 0 22px}.lead{font-size:21px}.intro-note{font-size:12px}.contents{padding:20px 0 0;border-left:0;border-top:1px solid var(--line)}.contents-title{display:none}.contents .eyebrow{margin-bottom:10px}.contents ol{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}.contents li{border:0}.contents a{padding:6px 0}.section{grid-template-columns:1fr;gap:22px;padding:28px 0 34px}h2{position:static;display:flex;gap:15px;align-items:baseline;margin:0;font-size:26px}.number{margin:0}.thesis{padding:23px 21px}.thesis h3{font-size:32px}.thesis .eyebrow{font-size:9px}.skills{grid-template-columns:1fr;gap:5px}.skills dd{margin-bottom:15px}footer{flex-wrap:wrap;gap:10px 22px}footer a:last-child{margin-left:auto}}
+.materials-intro{font:19px/1.6 var(--serif);margin-bottom:10px}
+.materials-status,.file-status{font-size:12px;color:var(--muted)}
+.materials-status{margin-bottom:30px}
+.course-group+.course-group{margin-top:38px}
+.degree-heading{font-size:23px;margin-bottom:18px}
+.degree-heading>span{display:block;font:11px/1.7 var(--sans);color:var(--accent);margin-top:7px}
+.course-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.course-row{padding:16px 0;border-bottom:1px solid var(--line)}
+.course-row h4{font:500 15px/1.6 var(--sans);margin:0;overflow-wrap:anywhere}
+.course-essay{margin-top:12px}
+.course-essay summary{cursor:pointer;font:16px/1.5 var(--serif);color:var(--accent);padding:8px 12px;background:rgba(255,255,255,.35)}
+.course-essay summary::marker{font-size:11px}
+.course-essay summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.resource-type{font:10px/1.6 var(--sans);text-transform:uppercase;letter-spacing:.08em;margin-right:12px}
+.essay-description{padding:16px 16px 0;border-left:1px solid var(--line);margin:12px 0 0 8px}
+.essay-description p:not(.subtitle):not(.file-status){font-size:14px;color:var(--muted)}
+/* Soft surfaces and a portrait, retaining the editorial typography. */
+:root{--line:#d8d9d3;--radius:24px;--shadow:0 8px 30px rgba(36,49,55,.045)}
+body{background-image:none}
+.header{border-bottom:1px solid var(--line)}
+.wordmark::before{border-radius:3px}
+nav{gap:6px;align-items:center}
+nav a{padding:9px 13px;border-radius:12px;transition:background .15s}
+nav a:hover{background:rgba(255,255,255,.65)}
+.intro{grid-template-columns:minmax(0,1fr) 260px;gap:32px 64px;padding:58px 0 42px}
+.portrait{margin:0;padding:9px;border:1px solid rgba(255,255,255,.9);border-radius:32px;background:rgba(255,255,255,.65);box-shadow:0 12px 38px rgba(36,49,55,.09)}
+.portrait img{display:block;width:100%;height:auto;aspect-ratio:1/1.12;object-fit:cover;object-position:50% 42%;border-radius:24px}
+.contents{grid-column:1/-1;display:flex;align-items:center;gap:26px;padding:16px 22px;border:1px solid rgba(255,255,255,.8);border-radius:18px;background:rgba(255,255,255,.48)}
+.contents .eyebrow{margin:0;flex-shrink:0}.contents-title{display:none}
+.contents ol{display:flex;flex:1;gap:20px;justify-content:space-between}
+.contents li{border:0}.contents a{gap:18px;padding:7px 0}
+.button{border-radius:13px;background:var(--accent);color:white;border-color:transparent;box-shadow:0 4px 12px rgba(35,92,122,.12)}
+.button:hover{background:#19465f}
+.section{border-top:1px solid var(--line)}
+.thesis{border:1px solid rgba(255,255,255,.9);border-radius:var(--radius);background:rgba(255,255,255,.67);box-shadow:var(--shadow)}
+#education .section-body,.course-group,.skills{border:1px solid rgba(255,255,255,.8);border-radius:var(--radius);padding:26px 28px;background:rgba(255,255,255,.5);box-shadow:var(--shadow)}
+.course-group+.course-group{margin-top:24px}
+.course-list{border-top:1px solid var(--line)}
+.course-row:last-child{border-bottom:0;padding-bottom:0}
+.course-essay summary{border-radius:12px;padding:12px 14px;background:rgba(35,92,122,.055)}
+.course-essay summary:hover{background:rgba(35,92,122,.09)}
+footer{border-top:1px solid var(--line)}
+@media(max-width:980px){.intro{grid-template-columns:minmax(0,1fr) 210px;gap:30px 34px}.contents{gap:18px;padding:14px 18px}.contents ol{gap:14px}.contents a{gap:10px}.contents .eyebrow{font-size:9px}}
+@media(max-width:680px){.intro{grid-template-columns:1fr;gap:26px;padding:32px 0}.portrait{grid-row:1;width:156px;padding:6px;border-radius:24px}.portrait img{border-radius:18px;aspect-ratio:1/1.05}.intro-copy{grid-row:2}.contents{grid-row:3;display:block;padding:18px}.contents .eyebrow{margin-bottom:9px}.contents ol{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.contents a{padding:7px 0}nav{gap:0}nav a{padding:8px 12px}nav a:first-child{padding-left:0}.thesis,#education .section-body,.course-group,.skills{padding:22px 20px;border-radius:20px}.skills{gap:5px}.skills dd:last-child{margin-bottom:0}}
+@media print{.portrait{display:none}.thesis,#education .section-body,.course-group,.skills{box-shadow:none;background:none;border:0;padding:0;border-radius:0}.contents{display:none}}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}}
+@media print{body{background:white;font-size:11pt}.header,.contact,.contents,footer,.skip{display:none}main{width:100%}.intro{display:block;padding:0 0 20px}h1{font-size:36pt}.section{padding:20px 0;grid-template-columns:140px 1fr;gap:20px}h2{position:static}.thesis{background:none;padding:12px}.thesis h3{font-size:23pt}.entry,.thesis{break-inside:avoid}a{color:inherit}}
+
+/* File locations remain visible before their PDFs are supplied. */
+.resource-placeholder{color:var(--muted);font-weight:400}
+.resource-placeholder>span{font-size:12px}
+.resource-placeholder small,.notes-placeholder small{font:10px/1.6 var(--sans);color:var(--muted)}
+.course-resources{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.notes-placeholder{display:inline-flex;align-items:center;flex-wrap:wrap;gap:12px;padding:7px 11px;border:1px dashed var(--line);border-radius:9px;color:var(--accent);font:11px/1.6 var(--sans)}
+
+/* Larger initials with smaller capital letterforms in section headings. */
+.section > h2{font-variant-caps:small-caps;letter-spacing:.025em}
+
+/* Course files: two-column catalogue, single column on small screens. */
+.course-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;border-top:0;align-items:stretch}
+.course-row,.course-row:last-child{display:flex;flex-direction:column;min-width:0;padding:20px 18px;border:1px solid rgba(35,92,122,.09);border-radius:16px;background:rgba(255,255,255,.65)}
+.course-row h4{margin-bottom:18px;overflow-wrap:normal}
+.course-resources{margin-top:auto;gap:8px}
+.notes-placeholder{gap:8px;padding:6px 9px}
+@media(max-width:680px){.course-list{grid-template-columns:1fr}.course-row,.course-row:last-child{padding:18px 16px}}
+@media print{.course-row{break-inside:avoid;background:none}}
+
+.research-resources{margin-top:24px;gap:10px}
+.research-resources a.notes-placeholder{text-decoration:none}
+.research-resources a.notes-placeholder:hover{background:rgba(35,92,122,.06);border-color:var(--accent)}
