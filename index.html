@@ -5,28 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Hengyi Li — mathematics, stochastics and Gaussian diffusions. Theses, course notes and essays.">
   <title>Hengyi Li | Mathematics</title>
-  <script src="assets/js/color-mode.js?v=2"></script>
-  <script src="assets/js/navigation.js?v=5" defer></script>
-  <script src="assets/js/motion.js?v=1" defer></script>
-  <link rel="stylesheet" href="assets/css/resume.css?v=20260916-21">
+  <script src="assets/js/color-mode.js?v=6"></script>
+  <script src="assets/js/navigation.js?v=8" defer></script>
+  <script src="assets/js/motion.js?v=2" defer></script>
+  <script src="assets/js/contact.js?v=3" defer></script>
+  <link rel="stylesheet" href="assets/css/resume.css?v=20260916-33">
+  <link rel="stylesheet" href="assets/css/motion.css?v=4">
+  <link rel="stylesheet" href="assets/css/typography.css?v=1">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="header">
     <div class="current-section"></div>
-    <nav aria-label="Main navigation"><a href="#education">Education</a><a href="#research">Research</a><a href="#courses">Coursework</a><a href="files/Hengyi-Li-CV.pdf">CV ↗</a></nav>
-    <button class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" title="Switch to dark mode" hidden><span class="theme-moon" aria-hidden="true">☾</span><span class="theme-sun" aria-hidden="true">☀</span></button>
+    <nav aria-label="Main navigation"><a href="#education">Education</a><a href="#research">Research</a><a href="#courses">Coursework</a></nav>
+    <div class="theme-control" hidden>
+      <button class="theme-toggle" type="button" aria-label="Toggle light or dark appearance; arrow down for options" aria-expanded="false" aria-controls="theme-options"><span class="theme-moon" aria-hidden="true">☾</span><span class="theme-sun" aria-hidden="true">☀</span></button>
+      <fieldset id="theme-options" class="theme-options" aria-label="Appearance" hidden>
+        <label><input type="radio" name="appearance" value="light"> Light</label>
+        <label><input type="radio" name="appearance" value="dark"> Dark</label>
+        <label><input type="radio" name="appearance" value="system"> System</label>
+      </fieldset>
+    </div>
   </header>
   <main id="main">
+    <div class="overview">
     <section class="intro" aria-labelledby="name">
       <div class="intro-copy">
       <h1 id="name">Hengyi Li</h1>
-      <p class="lead">Ignorance, yet knowledge. Chaos, yet harmony</p>
+      <p class="lead">Ignorance, yet knowledge. Chaos, yet harmony.</p>
       <address class="intro-details" aria-label="Contact details">
         <div><span class="detail-label">Location</span><span>Maarssen, Utrecht, Netherlands</span></div>
-        <div><span class="detail-label">Email</span><a href="mailto:pieterhelmold@gmail.com">pieterhelmold@gmail.com</a></div>
+        <div><span class="detail-label">Email</span><span class="email-actions"><a href="mailto:pieterhelmold@gmail.com">pieterhelmold@gmail.com</a><button class="copy-email" type="button" aria-label="Copy email address" hidden title="Copy email address"><svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg><svg class="copy-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></button><span class="copy-status" role="status" aria-live="polite"></span></span></div>
       </address>
-      <div class="contact"><a class="button" href="files/Hengyi-Li-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a><a href="https://github.com/peterhelmold">GitHub ↗</a><a href="https://www.linkedin.com/in/peterhelmold/">LinkedIn ↗</a></div>
+      <div class="contact"><a href="files/Hengyi-Li-CV.pdf">CV ↗</a><a href="https://github.com/peterhelmold">GitHub ↗</a><a href="https://www.linkedin.com/in/peterhelmold/">LinkedIn ↗</a></div>
       </div>
       <figure class="portrait"><img src="images/profile.png" alt="Portrait of Hengyi Li" width="1312" height="1199" fetchpriority="high"></figure>
     </section>
@@ -34,11 +45,13 @@
     <section class="section" id="education">
       <h2>Education</h2>
       <div class="section-body">
-        <article class="entry"><div class="entry-heading"><h3>University of Amsterdam</h3><p class="date">September 2023 — August 2026</p></div><p class="subtitle">MSc Mathematics · Stochastics</p></article>
-        <article class="entry"><div class="entry-heading"><h3>University of Liverpool<br>Xi’an Jiaotong-Liverpool University</h3><p class="date">September 2019 — July 2023</p></div><p class="subtitle">BSc Applied Mathematics</p></article>
-        <article class="entry compact"><div class="entry-heading"><h3>Daqing Experimental Middle School</h3><p class="date">September 2016 — June 2019</p></div><p class="subtitle">High School Diploma</p></article>
+        <article class="entry"><div class="entry-heading"><h3><span class="school-name"><span class="school-badge" aria-hidden="true"><img class="school-logo school-logo-uva" src="images/schools/UvA.png?v=2" alt="" aria-hidden="true"></span><span>University of Amsterdam</span></span></h3><p class="date">September 2023 — August 2026</p></div><p class="subtitle">MSc Mathematics · Stochastics</p></article>
+        <article class="entry"><div class="entry-heading"><h3><span class="school-name"><span class="school-badge" aria-hidden="true"><img class="school-logo school-logo-uol" src="images/schools/UoL.png?v=2" alt="" aria-hidden="true"></span><span>University of Liverpool</span></span><span class="school-name"><span class="school-badge" aria-hidden="true"><img class="school-logo school-logo-xjtlu" src="images/schools/XJTLU.png?v=2" alt="" aria-hidden="true"></span><span>Xi’an Jiaotong-Liverpool University</span></span></h3><p class="date">September 2019 — July 2023</p></div><p class="subtitle">BSc Applied Mathematics</p></article>
+        <article class="entry compact"><div class="entry-heading"><h3><span class="school-name"><span class="school-badge" aria-hidden="true"><img class="school-logo school-logo-dqsy" src="images/schools/DQSY.png?v=2" alt="" aria-hidden="true"></span><span>Daqing Experimental Middle School</span></span></h3><p class="date">September 2016 — June 2019</p></div><p class="subtitle">High School Diploma</p></article>
       </div>
     </section>
+
+    </div>
 
     <section class="section" id="research">
       <h2>Research</h2>

@@ -1,37 +1,100 @@
 (() => {
   const root = document.documentElement;
   const system = window.matchMedia('(prefers-color-scheme: dark)');
-  let preference = null;
+  let preference = 'system';
   try {
     const saved = localStorage.getItem('color-mode');
-    if (saved === 'dark' || saved === 'light') preference = saved;
-  } catch (_) { /* The toggle still works when storage is unavailable. */ }
-  let button;
-  let transitionTimer;
+    if (['light', 'dark', 'system'].includes(saved)) preference = saved;
+  } catch (_) { /* Preferences still work when storage is unavailable. */ }
+  let control;
   const apply = () => {
-    const dark = (preference || (system.matches ? 'dark' : 'light')) === 'dark';
-    if (button && root.dataset.theme !== (dark ? 'dark' : 'light')) {
-      clearTimeout(transitionTimer);
-      root.classList.add('theme-changing');
-      transitionTimer = setTimeout(() => root.classList.remove('theme-changing'), 350);
-    }
-    root.dataset.theme = dark ? 'dark' : 'light';
-    if (button) {
-      button.setAttribute('aria-pressed', String(dark));
-      button.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
-    }
+    root.dataset.theme = preference === 'system' ? (system.matches ? 'dark' : 'light') : preference;
+    root.dataset.appearance = preference;
+    control?.querySelectorAll('input').forEach(input => { input.checked = input.value === preference; });
   };
   apply();
   system.addEventListener('change', apply);
   document.addEventListener('DOMContentLoaded', () => {
-    button = document.querySelector('.theme-toggle');
-    if (!button) return;
-    button.hidden = false;
+    control = document.querySelector('.theme-control');
+    if (!control) return;
+    const button = control.querySelector('button');
+    const options = control.querySelector('fieldset');
+    let closeTimer;
+    let menuAnimation;
+    let expanded = false;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const settle = () => {
+      options.hidden = !expanded;
+      menuAnimation?.cancel();
+      menuAnimation = null;
+    };
+    const show = next => {
+      clearTimeout(closeTimer);
+      if (expanded === next) return;
+      expanded = next;
+      const start = options.hidden
+        ? { opacity: 0, transform: 'translateY(-5px) scale(.97)' }
+        : { opacity: getComputedStyle(options).opacity, transform: getComputedStyle(options).transform };
+      menuAnimation?.cancel();
+      menuAnimation = null;
+      options.hidden = false;
+      options.inert = !expanded;
+      button.setAttribute('aria-expanded', String(expanded));
+      if (reduced.matches || !options.animate) { settle(); return; }
+      menuAnimation = options.animate([
+        start,
+        expanded ? { opacity: 1, transform: 'translateY(0) scale(1)' }
+          : { opacity: 0, transform: 'translateY(-3px) scale(.98)' }
+      ], {
+        duration: expanded ? 200 : 150,
+        easing: expanded ? 'cubic-bezier(.22,1,.36,1)' : 'ease-out',
+        fill: 'both'
+      });
+      menuAnimation.onfinish = settle;
+    };
+    const open = () => show(true);
+    const close = (restoreFocus = false) => {
+      show(false);
+      if (restoreFocus) button.focus();
+    };
+    reduced.addEventListener('change', () => { if (menuAnimation) settle(); });
+    control.hidden = false;
     apply();
+    requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('theme-ready')));
+    control.addEventListener('pointerenter', event => {
+      if (event.pointerType === 'mouse') open();
+    });
+    control.addEventListener('pointerleave', event => {
+      if (event.pointerType === 'mouse') closeTimer = setTimeout(() => {
+        if (!options.contains(document.activeElement)) close();
+      }, 180);
+    });
     button.addEventListener('click', () => {
       preference = root.dataset.theme === 'dark' ? 'light' : 'dark';
       try { localStorage.setItem('color-mode', preference); } catch (_) {}
       apply();
+      // Touch users can still reach all three choices after a direct toggle.
+      open();
+    });
+    button.addEventListener('keydown', event => {
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        open();
+        options.querySelector('input:checked').focus();
+      }
+    });
+    options.addEventListener('change', event => {
+      if (!event.target.matches('input[name="appearance"]')) return;
+      preference = event.target.value;
+      try { localStorage.setItem('color-mode', preference); } catch (_) {}
+      apply();
+    });
+    document.addEventListener('pointerdown', event => { if (!control.contains(event.target)) close(); });
+    control.addEventListener('keydown', event => {
+      if (event.key === 'Escape') { event.preventDefault(); close(true); }
+    });
+    control.addEventListener('focusout', event => {
+      if (!control.contains(event.relatedTarget)) close();
     });
   });
 })();

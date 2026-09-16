@@ -1,0 +1,64 @@
+/* Two type families: editorial titles and a quiet, consistent reading/UI face. */
+:root {
+  --ink: #292929;
+  --text-secondary: #4c4c4c;
+  --muted: #686868;
+  --type-meta: 12px;
+  --type-body: 14px;
+  --type-heading: 18px;
+}
+@media screen {
+  :root[data-theme="dark"] {
+    --ink: #e9e9e9;
+    --text-secondary: #c6c6c6;
+    --muted: #ababab;
+  }
+}
+/* The name, section headings and paper titles retain their print character. */
+:root .section > h2 { font: normal 24px/1.3 var(--serif); font-variant-caps: small-caps; letter-spacing: .025em; color: var(--ink); }
+:root .overview #education h3,
+:root .course-group > summary .degree-heading {
+  font: 600 var(--type-heading)/1.45 var(--sans);
+  letter-spacing: 0; color: var(--ink);
+}
+:root .overview .lead { font: normal var(--type-body)/1.6 var(--sans); color: var(--muted); }
+:root .course-list .course-row h4,
+:root .skills { font: 400 var(--type-body)/1.7 var(--sans); color: var(--ink); }
+:root .course-list .course-row h4, :root .skills dt { font-weight: 500; }
+:root .intro-details { font-size: var(--type-body); color: var(--text-secondary); }
+:root .research-description p { font: 400 var(--type-body)/1.8 var(--sans); color: var(--text-secondary); }
+:root .skills dd { color: var(--text-secondary); }
+:root .subtitle { font: 400 var(--type-meta)/1.7 var(--sans); color: var(--text-secondary); }
+:root .date, :root .detail-label, :root .eyebrow,
+:root .contact, :root .header nav, :root footer {
+  font: 400 var(--type-meta)/1.6 var(--sans);
+  letter-spacing: 0;
+}
+:root .date, :root .detail-label, :root .eyebrow, :root footer { color: var(--muted); }
+:root .eyebrow { font-weight: 500; letter-spacing: .06em; }
+/* Pending files are information; only available links carry the blue accent. */
+:root .course-resources .notes-placeholder { font: 400 var(--type-meta)/1.6 var(--sans); color: var(--text-secondary); }
+:root .course-resources .notes-placeholder small { font: inherit; color: var(--muted); }
+:root a, :root .course-resources a.notes-placeholder,
+:root .header a:hover { color: var(--accent); }
+:root .research-summary > summary,
+:root .research-summary > summary:hover h3 { color: var(--ink); }
+:root .research-summary > summary::after,
+:root .course-group > summary::after { border-color: var(--muted); }
+:root .copy-email, :root .theme-toggle { color: var(--text-secondary); }
+:root .theme-options { font: 400 var(--type-meta)/1.6 var(--sans); }
+:root .theme-options label:has(input:checked) {
+  color: var(--ink);
+  background: color-mix(in srgb,var(--ink) 8%,transparent);
+  font-weight: 600;
+}
+:root .theme-options label:hover,
+:root .copy-email:hover { background: color-mix(in srgb,var(--ink) 6%,transparent); }
+:root .theme-options input { accent-color: var(--ink); }
+:root .theme-toggle:focus-visible, :root .copy-email:focus-visible,
+:root .theme-options label:has(input:focus-visible),
+:root .research-summary > summary:focus-visible,
+:root .course-group > summary:focus-visible { outline-color: var(--ink); }
+@media(max-width:680px) {
+  :root .overview #education h3 { font-size: 17px; }
+}

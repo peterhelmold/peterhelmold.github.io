@@ -1,0 +1,117 @@
+/* Shared timings: immediate feedback, then a soft, short settle. */
+:root {
+  --motion-press: 120ms;
+  --motion-feedback: 180ms;
+  --motion-expand: 280ms;
+  --motion-theme: 300ms;
+  --motion-nav: 340ms;
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* Theme colors compose with each control's own transform transition. */
+@media screen {
+  .theme-ready :is(body, .header, .thesis, .course-group, .course-row, .portrait,
+    a, p, h1, h2, h3, h4, .date, .eyebrow, .notes-placeholder, .theme-toggle,
+    .current-section, .section, .entry, .skills, .skills dd, footer, summary, .detail-label,
+    .intro-details, .copy-email, .copy-status, .theme-options, .school-badge, .notes-placeholder small) {
+    transition: background-color var(--motion-theme) ease,
+      color var(--motion-theme) ease, border-color var(--motion-theme) ease,
+      box-shadow var(--motion-theme) ease,
+      transform var(--motion-feedback) var(--motion-ease);
+  }
+}
+
+/* Both disclosure controls use the same rotating chevron. The data attribute
+   reflects the destination while native details stays open during closing. */
+.course-group > summary::after,
+.research-summary > summary::after {
+  content: "";
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+  transform: rotate(45deg);
+  transition: transform var(--motion-expand) var(--motion-ease),
+    border-color var(--motion-theme) ease;
+}
+.course-group[open] > summary::after { content: ""; }
+.research-summary[open] > summary::after { margin-top: 36px; }
+.course-group[open] > summary::after,
+.research-summary[open] > summary::after { transform: rotate(225deg); }
+:is(.course-group, .research-summary)[data-expanded="false"] > summary::after { transform: rotate(45deg); }
+:is(.course-group, .research-summary)[data-expanded="true"] > summary::after { transform: rotate(225deg); }
+.course-group > summary::after { margin-right: 3px; }
+
+/* Static course cards should not suggest that the whole card is clickable. */
+@media (hover: hover) and (pointer: fine) {
+  .course-row:hover { transform: none; box-shadow: none; border-color: rgba(35,92,122,.09); }
+  [data-theme="dark"] .course-row:hover { border-color: var(--line); }
+  .contact .button:hover { transform: translateY(-1px); }
+  .back-to-top.is-visible:hover { transform: translateY(-2px); }
+}
+.course-row:focus-within { border-color: var(--accent); }
+.contact .button:active,
+.research-resources a:active,
+.theme-toggle:active,
+.back-to-top.is-visible:active {
+  transform: scale(.96);
+  transition-duration: var(--motion-press);
+}
+
+/* Crossfade the icons without changing the button's layout. */
+.theme-toggle > .theme-sun,
+.theme-toggle > .theme-moon {
+  display: block;
+  grid-area: 1 / 1;
+  pointer-events: none;
+  transition: opacity var(--motion-feedback) ease,
+    transform var(--motion-expand) var(--motion-ease);
+}
+.theme-toggle > .theme-sun { opacity: 0; transform: rotate(-35deg) scale(.8); }
+.theme-toggle > .theme-moon { opacity: 1; transform: rotate(0) scale(1); }
+[data-theme="dark"] .theme-toggle > .theme-sun { opacity: 1; transform: rotate(0) scale(1); }
+[data-theme="dark"] .theme-toggle > .theme-moon { opacity: 0; transform: rotate(35deg) scale(.8); }
+
+.nav-indicator {
+  transition: transform var(--motion-nav) var(--motion-ease),
+    width var(--motion-nav) var(--motion-ease),
+    opacity var(--motion-feedback) ease,
+    background-color var(--motion-theme) ease;
+}
+.nav-indicator.is-positioning { transition: none; }
+.back-to-top,
+:root.theme-ready .back-to-top {
+  transform: translateY(6px);
+  transition: opacity 260ms ease,
+    visibility 0s linear 260ms,
+    transform var(--motion-expand) var(--motion-ease),
+    background-color var(--motion-theme) ease,
+    color var(--motion-theme) ease, border-color var(--motion-theme) ease,
+    box-shadow var(--motion-feedback) ease;
+}
+.back-to-top.is-visible,
+:root.theme-ready .back-to-top.is-visible { transform: translateY(0); transition-delay: 0s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+  .contact .button:hover, .contact .button:active,
+  .research-resources a:active, .theme-toggle:active,
+  .back-to-top, .back-to-top.is-visible:hover, .back-to-top.is-visible:active { transform: none; }
+}
+
+/* Appearance menu opens from its trigger; native radio keys remain available. */
+.theme-options { transform-origin: top right; }
+.theme-options label {
+  transition: background-color 160ms ease, color 160ms ease, transform 120ms ease;
+}
+.theme-options label:has(input:checked) {
+  background: color-mix(in srgb,var(--accent) 10%,transparent);
+  color: var(--accent);
+}
+.theme-options label:active { transform: scale(.98); }
+.theme-options label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 1px; }
+@media(prefers-reduced-motion:reduce) {
+  .theme-options label:active { transform: none; }
+}
