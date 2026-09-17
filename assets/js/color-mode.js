@@ -24,6 +24,14 @@
     const expand = parseFloat(motion.getPropertyValue('--motion-expand')) || 280;
     const easing = motion.getPropertyValue('--motion-ease').trim() || 'ease-out';
     let closeTimer;
+    let hoverTimer;
+    let pressTimer;
+    let pressOrigin = null;
+    let longPressed = false;
+    const clearPress = () => {
+      clearTimeout(pressTimer);
+      pressOrigin = null;
+    };
     let menuAnimation;
     let expanded = false;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -58,6 +66,8 @@
     };
     const open = () => show(true);
     const close = (restoreFocus = false) => {
+      clearTimeout(hoverTimer);
+      clearPress();
       show(false);
       if (restoreFocus) button.focus();
     };
@@ -66,23 +76,57 @@
     apply();
     requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('theme-ready')));
     control.addEventListener('pointerenter', event => {
-      if (event.pointerType === 'mouse') open();
+      clearTimeout(closeTimer);
+      if (event.pointerType === 'mouse') {
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(open, 650);
+      }
     });
     control.addEventListener('pointerleave', event => {
+      clearTimeout(hoverTimer);
+      clearPress();
       if (event.pointerType === 'mouse') closeTimer = setTimeout(() => {
         if (!options.contains(document.activeElement)) close();
       }, 180);
     });
-    button.addEventListener('click', () => {
+    button.addEventListener('pointerdown', event => {
+      if (event.button !== 0 || !event.isPrimary) return;
+      clearTimeout(hoverTimer);
+      clearPress();
+      longPressed = false;
+      pressOrigin = { x: event.clientX, y: event.clientY };
+      pressTimer = setTimeout(() => {
+        longPressed = true;
+        open();
+      }, 500);
+    });
+    button.addEventListener('pointermove', event => {
+      if (pressOrigin && Math.hypot(event.clientX - pressOrigin.x, event.clientY - pressOrigin.y) > 10) clearPress();
+    });
+    button.addEventListener('pointerleave', clearPress);
+    document.addEventListener('pointerup', clearPress);
+    document.addEventListener('pointercancel', () => { clearPress(); longPressed = false; });
+    button.addEventListener('contextmenu', event => {
+      if (longPressed || pressOrigin) event.preventDefault();
+    });
+    button.addEventListener('click', event => {
+      clearTimeout(hoverTimer);
+      clearPress();
+      if (longPressed && event.detail !== 0) {
+        event.preventDefault();
+        longPressed = false;
+        return;
+      }
+      longPressed = false;
       preference = root.dataset.theme === 'dark' ? 'light' : 'dark';
       try { localStorage.setItem('color-mode', preference); } catch (_) {}
       apply();
-      // Touch users can still reach all three choices after a direct toggle.
-      open();
+      close();
     });
     button.addEventListener('keydown', event => {
       if (event.key === 'ArrowDown') {
         event.preventDefault();
+        clearTimeout(hoverTimer);
         open();
         options.querySelector('input:checked').focus();
       }
