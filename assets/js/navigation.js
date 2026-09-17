@@ -12,6 +12,9 @@
   nav.prepend(indicator);
   nav.classList.add('has-indicator');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const motion = getComputedStyle(document.documentElement);
+  const feedback = parseFloat(motion.getPropertyValue('--motion-feedback')) || 180;
+  const easing = motion.getPropertyValue('--motion-ease').trim() || 'ease-out';
   let labelAnimation;
   const update = () => {
     let current = null;
@@ -26,7 +29,7 @@
       if (title && !reducedMotion.matches) {
         labelAnimation = label.animate(
           [{ opacity: 0, transform: 'translateY(3px)' }, { opacity: 1, transform: 'translateY(0)' }],
-          { duration: 200, easing: 'cubic-bezier(.22,1,.36,1)' }
+          { duration: feedback, easing }
         );
       }
     }

@@ -1,0 +1,185 @@
+/* Shared rules: flat content panels, consistent controls, elevated overlays. */
+:root {
+  --control-height: 36px;
+  --radius-panel: 24px;
+  --radius-control: 12px;
+  --radius-label: 8px;
+  --radius-pill: 999px;
+  --control-radius: var(--radius-control);
+  --overlay-shadow: 0 8px 28px rgba(25,35,42,.12), 0 2px 6px rgba(25,35,42,.05);
+}
+:root[data-theme="dark"] { --overlay-shadow: 0 8px 28px rgba(0,0,0,.3), 0 2px 6px rgba(0,0,0,.16); }
+.ui-icon {
+  display: block; width: 16px; height: 16px; flex: 0 0 16px;
+  fill: none; stroke: currentColor; stroke-width: 1.75;
+  stroke-linecap: round; stroke-linejoin: round; pointer-events: none;
+}
+@media screen {
+  :root .thesis, :root .course-group, :root .portrait { box-shadow: none; }
+  :root .overview .contact { gap: 16px; }
+  :root .contact a:not(.document-link) { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+  :root .contact .document-link, :root .course-resources .notes-placeholder {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: var(--control-height); padding: 7px 12px;
+    border: 1px solid var(--line); border-radius: var(--control-radius);
+    background: transparent; box-shadow: none; text-decoration: none;
+    line-height: 20px;
+  }
+  :root .contact .document-link, :root .course-resources a.notes-placeholder { color: var(--accent); }
+  :root .course-resources span.notes-placeholder { border-style: dashed; }
+  :root .contact .document-link:hover, :root .course-resources a.notes-placeholder:hover {
+    background: color-mix(in srgb,var(--accent) 6%,var(--paper));
+    border-color: color-mix(in srgb,var(--accent) 35%,var(--line));
+    text-decoration: none;
+  }
+  :root .contact .document-link:active, :root .course-resources a.notes-placeholder:active { transform: scale(.97); }
+  :root .theme-toggle, :root .copy-email {
+    width: var(--control-height); height: var(--control-height); min-width: var(--control-height);
+    padding: 0; border: 1px solid transparent; border-radius: var(--control-radius);
+    background: transparent; box-shadow: none; color: var(--muted);
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  :root .theme-toggle:hover, :root .copy-email:hover {
+    background: color-mix(in srgb,var(--ink) 6%,transparent);
+    box-shadow: none; color: var(--ink);
+  }
+  :root .theme-options {
+    border-radius: var(--radius-control); padding: 8px; box-shadow: var(--overlay-shadow);
+    background: color-mix(in srgb,var(--paper) 90%,transparent);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  }
+  :root .theme-options label { min-height: var(--control-height); }
+  :root .back-to-top {
+    width: var(--control-height); height: var(--control-height);
+    border-radius: var(--control-radius); background: var(--paper);
+    box-shadow: var(--overlay-shadow); color: var(--muted);
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  :root .back-to-top:hover { box-shadow: var(--overlay-shadow); color: var(--accent); }
+}
+/* The same SVG chevron is used for every disclosure. */
+:root .research-summary > summary::after, :root .course-group > summary::after { display: none; }
+.disclosure-icon { color: var(--muted); transition: transform var(--motion-expand) var(--motion-ease); }
+.research-summary > summary > .disclosure-icon { align-self: flex-start; margin-top: 30px; }
+:is(.research-summary,.course-group)[open] > summary > .disclosure-icon { transform: rotate(180deg); }
+:is(.research-summary,.course-group)[data-expanded="false"] > summary > .disclosure-icon { transform: rotate(0); }
+:is(.research-summary,.course-group)[data-expanded="true"] > summary > .disclosure-icon { transform: rotate(180deg); }
+@media (pointer: coarse) { :root { --control-height: 44px; } }
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+  :root .theme-options { background: var(--paper); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root .theme-options { background: var(--paper); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root .contact .document-link:active, :root .course-resources a.notes-placeholder:active { transform: none; }
+  .disclosure-icon { transition: none; }
+}
+
+/* Feedback belongs to the clickable title, not the static thesis card. */
+:root .research-summary > summary {
+  min-height: 44px; border-radius: var(--control-radius);
+  padding-inline: 8px; margin-inline: 0;
+}
+:root .research-summary > summary:focus-visible,
+:root .course-group > summary:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 4px;
+  background: color-mix(in srgb,var(--accent) 5%,transparent);
+}
+@media (hover: hover) and (pointer: fine) {
+  :root .research-summary > summary:hover {
+    background: color-mix(in srgb,var(--accent) 5%,transparent);
+  }
+}
+/* Three tempos: press 120ms, feedback 180ms, structural motion 280ms. */
+@media screen {
+  :root .research-summary > summary, :root .course-group > summary,
+  :root .contact .document-link, :root .course-resources a.notes-placeholder,
+  :root .theme-toggle, :root .copy-email, :root .theme-options label {
+    transition: transform var(--motion-feedback) var(--motion-ease),
+      background-color var(--motion-feedback) var(--motion-ease),
+      border-color var(--motion-feedback) var(--motion-ease);
+    touch-action: manipulation;
+  }
+  :root .copy-email svg {
+    transition: opacity var(--motion-feedback) var(--motion-ease),
+      transform var(--motion-expand) var(--motion-ease);
+  }
+  :root .contact .document-link:active, :root .course-resources a.notes-placeholder:active,
+  :root .theme-toggle:active, :root .copy-email:active, :root .theme-options label:active {
+    transform: scale(.97); transition-duration: var(--motion-press);
+  }
+}
+@media (max-width:680px), (any-pointer:coarse) {
+  :root { --control-height: 44px; }
+
+  :root .header nav a, :root .contact a:not(.document-link),
+  :root .email-actions > a, :root footer a {
+    display: inline-flex; align-items: center; min-height: 44px;
+  }
+  :root .email-actions { align-items: center; }
+  :root .research-summary > summary { gap: 12px; }
+  :root .theme-options label { min-height: 44px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  :root .contact .document-link:active, :root .course-resources a.notes-placeholder:active,
+  :root .theme-toggle:active, :root .copy-email:active, :root .theme-options label:active { transform: none; }
+}
+
+@media (max-width:680px) {
+  :root .header { grid-template-columns: minmax(0,1fr) 44px; }
+}
+
+/* Keep rounded feedback inside the animated clipping box. */
+:root .research-summary { margin-inline: -8px; }
+:root .research-description { padding-inline: 8px; }
+:root .research-summary > summary:focus-visible { outline-offset: -2px; }
+/* Underlined links stay lightweight, with visible pointer and keyboard feedback. */
+:root :is(.contact a:not(.document-link), .email-actions > a, footer a) {
+  display: inline-flex; align-items: center; padding: 3px 6px; margin: -3px -6px;
+  border-radius: var(--radius-control);
+  box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  transition: color var(--motion-feedback) var(--motion-ease),
+    background-color var(--motion-feedback) var(--motion-ease),
+    text-decoration-color var(--motion-feedback) var(--motion-ease);
+}
+@media (hover:hover) and (pointer:fine) {
+  :root :is(.contact a:not(.document-link), .email-actions > a, footer a):hover {
+    color: var(--ink);
+    background: color-mix(in srgb,var(--accent) 8%,transparent);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+}
+:root :is(.contact a:not(.document-link), .email-actions > a, footer a):focus-visible {
+  background: color-mix(in srgb,var(--accent) 8%,transparent);
+  outline: 2px solid var(--accent); outline-offset: 3px;
+}
+
+/* Four radius roles, shared across desktop and mobile. */
+@media screen {
+  :root .thesis, :root .course-group { border-radius: var(--radius-panel); }
+  :root .course-group > summary { border-radius: var(--radius-panel); }
+  :root .theme-options label, :root .school-badge { border-radius: var(--radius-label); }
+  :root .overview .portrait { padding: 4px; border-radius: var(--radius-control); }
+  :root .overview .portrait img { border-radius: var(--radius-label); }
+  :root .header nav a, :root .nav-indicator { border-radius: var(--radius-pill); }
+}
+
+/* PDF arrows respond with the same timing and emphasis as text links. */
+:root :is(.document-link, .course-resources a) > .ui-icon {
+  transition: transform var(--motion-feedback) var(--motion-ease),
+    color var(--motion-feedback) var(--motion-ease),
+    stroke-width var(--motion-feedback) var(--motion-ease);
+}
+@media (hover:hover) and (pointer:fine) {
+  :root :is(.document-link, .course-resources a):hover > .ui-icon {
+    color: var(--ink); stroke-width: 2; transform: translate(2px,-2px);
+  }
+}
+:root :is(.document-link, .course-resources a):focus-visible > .ui-icon {
+  color: var(--ink); stroke-width: 2; transform: translate(2px,-2px);
+}
+@media (prefers-reduced-motion:reduce) {
+  :root :is(.document-link, .course-resources a):is(:hover,:focus-visible) > .ui-icon { transform: none; }
+}

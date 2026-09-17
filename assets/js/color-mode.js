@@ -19,6 +19,10 @@
     if (!control) return;
     const button = control.querySelector('button');
     const options = control.querySelector('fieldset');
+    const motion = getComputedStyle(root);
+    const feedback = parseFloat(motion.getPropertyValue('--motion-feedback')) || 180;
+    const expand = parseFloat(motion.getPropertyValue('--motion-expand')) || 280;
+    const easing = motion.getPropertyValue('--motion-ease').trim() || 'ease-out';
     let closeTimer;
     let menuAnimation;
     let expanded = false;
@@ -46,8 +50,8 @@
         expanded ? { opacity: 1, transform: 'translateY(0) scale(1)' }
           : { opacity: 0, transform: 'translateY(-3px) scale(.98)' }
       ], {
-        duration: expanded ? 200 : 150,
-        easing: expanded ? 'cubic-bezier(.22,1,.36,1)' : 'ease-out',
+        duration: expanded ? expand : feedback,
+        easing,
         fill: 'both'
       });
       menuAnimation.onfinish = settle;

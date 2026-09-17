@@ -3,8 +3,8 @@
   --motion-press: 120ms;
   --motion-feedback: 180ms;
   --motion-expand: 280ms;
-  --motion-theme: 300ms;
-  --motion-nav: 340ms;
+  --motion-theme: var(--motion-expand);
+  --motion-nav: var(--motion-expand);
   --motion-ease: cubic-bezier(.22, 1, .36, 1);
 }
 
@@ -62,7 +62,7 @@
   display: block;
   grid-area: 1 / 1;
   pointer-events: none;
-  transition: opacity var(--motion-feedback) ease,
+  transition: opacity var(--motion-feedback) var(--motion-ease),
     transform var(--motion-expand) var(--motion-ease);
 }
 .theme-toggle > .theme-sun { opacity: 0; transform: rotate(-35deg) scale(.8); }
@@ -73,14 +73,14 @@
 .nav-indicator {
   transition: transform var(--motion-nav) var(--motion-ease),
     width var(--motion-nav) var(--motion-ease),
-    opacity var(--motion-feedback) ease;
+    opacity var(--motion-feedback) var(--motion-ease);
 }
 .nav-indicator.is-positioning { transition: none; }
 .back-to-top,
 :root.theme-ready .back-to-top {
   transform: translateY(6px);
-  transition: opacity 260ms ease,
-    visibility 0s linear 260ms,
+  transition: opacity var(--motion-feedback) var(--motion-ease),
+    visibility 0s linear var(--motion-feedback),
     transform var(--motion-expand) var(--motion-ease);
 }
 .back-to-top.is-visible,
@@ -97,7 +97,7 @@
 /* Appearance menu opens from its trigger; native radio keys remain available. */
 .theme-options { transform-origin: top right; }
 .theme-options label {
-  transition: transform 120ms ease;
+  transition: transform var(--motion-press) var(--motion-ease);
 }
 .theme-options label:has(input:checked) {
   background: color-mix(in srgb,var(--accent) 10%,transparent);

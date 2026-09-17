@@ -6,6 +6,9 @@
   --type-meta: 12px;
   --type-body: 14px;
   --type-heading: 18px;
+  --type-section: 24px;
+  --type-display-small: clamp(30px, 3.4vw, 43px);
+  --type-display-large: clamp(52px, 5.5vw, 72px);
 }
 @media screen {
   :root[data-theme="dark"] {
@@ -15,7 +18,15 @@
   }
 }
 /* The name, section headings and paper titles retain their print character. */
-:root .section > h2 { font: normal 24px/1.3 var(--serif); font-variant-caps: small-caps; letter-spacing: .025em; color: var(--ink); }
+:root .overview #education > h2, :root .section > h2 { font: normal var(--type-section)/1.3 var(--serif); font-variant-caps: small-caps; letter-spacing: .025em; color: var(--ink); }
+/* All screen text uses these six roles, including responsive layouts. */
+@media screen {
+  :root body { font-size: var(--type-body); }
+  :root .overview h1 { font-size: var(--type-display-large); line-height: 1.07; }
+  :root .thesis h3 { font-size: var(--type-display-small); line-height: 1.18; }
+}
+:root .current-section { font-size: var(--type-heading); }
+:root .theme-toggle, :root .back-to-top { font-size: var(--type-section); }
 :root .overview #education h3,
 :root .course-group > summary .degree-heading {
   font: 600 var(--type-heading)/1.45 var(--sans);
@@ -29,8 +40,10 @@
 :root .research-description p { font: 400 var(--type-body)/1.8 var(--sans); color: var(--text-secondary); }
 :root .skills dd { color: var(--text-secondary); }
 :root .subtitle { font: 400 var(--type-meta)/1.7 var(--sans); color: var(--text-secondary); }
+:root #education .subtitle { font-size: var(--type-body); }
+:root .contact { font: 400 var(--type-body)/1.6 var(--sans); }
 :root .date, :root .detail-label, :root .eyebrow,
-:root .contact, :root .header nav, :root footer {
+:root .header nav, :root footer {
   font: 400 var(--type-meta)/1.6 var(--sans);
   letter-spacing: 0;
 }
@@ -47,6 +60,7 @@
 :root .course-group > summary::after { border-color: var(--muted); }
 :root .copy-email, :root .theme-toggle { color: var(--text-secondary); }
 :root .theme-options { font: 400 var(--type-meta)/1.6 var(--sans); }
+:root .theme-options legend, :root .copy-status.copy-error { font-size: var(--type-meta); }
 :root .theme-options label:has(input:checked) {
   color: var(--ink);
   background: color-mix(in srgb,var(--ink) 8%,transparent);
@@ -59,8 +73,11 @@
 :root .theme-options label:has(input:focus-visible),
 :root .research-summary > summary:focus-visible,
 :root .course-group > summary:focus-visible { outline-color: var(--ink); }
-@media(max-width:680px) {
-  :root .overview #education h3 { font-size: 17px; }
+/* Make room for the name on narrow phones without adding another type size. */
+@media screen and (max-width:360px) {
+  :root .overview .intro { display: flex; }
+  :root .overview .portrait { position: static; }
+  :root .overview h1 { padding-right: 0; min-height: 0; }
 }
 
 :root .overview .lead { max-width: 48ch; color: var(--text-secondary); }

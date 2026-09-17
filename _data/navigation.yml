@@ -1,9 +1,0 @@
-main:
-  - title: "Education"
-    url: /#education
-  - title: "Research"
-    url: /#research
-  - title: "Coursework"
-    url: /#courses
-  - title: "CV"
-    url: /files/Hengyi-Li-CV.pdf
