@@ -62,3 +62,7 @@
 @media(max-width:680px) {
   :root .overview #education h3 { font-size: 17px; }
 }
+
+:root .overview .lead { max-width: 48ch; color: var(--text-secondary); }
+:root footer { flex-direction: column; align-items: center; gap: 8px; }
+:root .footer-motto { margin: 0; color: var(--muted); font: 400 var(--type-meta)/1.6 var(--sans); }

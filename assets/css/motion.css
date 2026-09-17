@@ -8,16 +8,14 @@
   --motion-ease: cubic-bezier(.22, 1, .36, 1);
 }
 
-/* Theme colors compose with each control's own transform transition. */
+/* Switch text and surfaces together: interpolating both loses contrast mid-theme.
+   Keep motion on interactive elements, never on inherited text colors. */
 @media screen {
   .theme-ready :is(body, .header, .thesis, .course-group, .course-row, .portrait,
     a, p, h1, h2, h3, h4, .date, .eyebrow, .notes-placeholder, .theme-toggle,
     .current-section, .section, .entry, .skills, .skills dd, footer, summary, .detail-label,
     .intro-details, .copy-email, .copy-status, .theme-options, .school-badge, .notes-placeholder small) {
-    transition: background-color var(--motion-theme) ease,
-      color var(--motion-theme) ease, border-color var(--motion-theme) ease,
-      box-shadow var(--motion-theme) ease,
-      transform var(--motion-feedback) var(--motion-ease);
+    transition: transform var(--motion-feedback) var(--motion-ease);
   }
 }
 
@@ -32,8 +30,7 @@
   border-right: 1.5px solid var(--accent);
   border-bottom: 1.5px solid var(--accent);
   transform: rotate(45deg);
-  transition: transform var(--motion-expand) var(--motion-ease),
-    border-color var(--motion-theme) ease;
+  transition: transform var(--motion-expand) var(--motion-ease);
 }
 .course-group[open] > summary::after { content: ""; }
 .research-summary[open] > summary::after { margin-top: 36px; }
@@ -76,8 +73,7 @@
 .nav-indicator {
   transition: transform var(--motion-nav) var(--motion-ease),
     width var(--motion-nav) var(--motion-ease),
-    opacity var(--motion-feedback) ease,
-    background-color var(--motion-theme) ease;
+    opacity var(--motion-feedback) ease;
 }
 .nav-indicator.is-positioning { transition: none; }
 .back-to-top,
@@ -85,10 +81,7 @@
   transform: translateY(6px);
   transition: opacity 260ms ease,
     visibility 0s linear 260ms,
-    transform var(--motion-expand) var(--motion-ease),
-    background-color var(--motion-theme) ease,
-    color var(--motion-theme) ease, border-color var(--motion-theme) ease,
-    box-shadow var(--motion-feedback) ease;
+    transform var(--motion-expand) var(--motion-ease);
 }
 .back-to-top.is-visible,
 :root.theme-ready .back-to-top.is-visible { transform: translateY(0); transition-delay: 0s; }
@@ -104,7 +97,7 @@
 /* Appearance menu opens from its trigger; native radio keys remain available. */
 .theme-options { transform-origin: top right; }
 .theme-options label {
-  transition: background-color 160ms ease, color 160ms ease, transform 120ms ease;
+  transition: transform 120ms ease;
 }
 .theme-options label:has(input:checked) {
   background: color-mix(in srgb,var(--accent) 10%,transparent);
