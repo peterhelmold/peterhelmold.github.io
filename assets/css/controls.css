@@ -6,16 +6,26 @@
   --radius-label: 8px;
   --radius-pill: 999px;
   --control-radius: var(--radius-control);
+  --surface-content: #fbfaf8;
+  --surface-overlay: color-mix(in srgb,var(--paper) 92%,transparent);
+  --overlay-blur: 12px;
   --overlay-shadow: 0 8px 28px rgba(25,35,42,.12), 0 2px 6px rgba(25,35,42,.05);
 }
-:root[data-theme="dark"] { --overlay-shadow: 0 8px 28px rgba(0,0,0,.3), 0 2px 6px rgba(0,0,0,.16); }
+:root[data-theme="dark"] { --surface-content: #20272c; --overlay-shadow: 0 8px 28px rgba(0,0,0,.3), 0 2px 6px rgba(0,0,0,.16); }
 .ui-icon {
   display: block; width: 16px; height: 16px; flex: 0 0 16px;
   fill: none; stroke: currentColor; stroke-width: 1.75;
   stroke-linecap: round; stroke-linejoin: round; pointer-events: none;
 }
 @media screen {
-  :root .thesis, :root .course-group, :root .portrait { box-shadow: none; }
+  :root .thesis, :root .course-group, :root .portrait {
+    background: var(--surface-content); box-shadow: none;
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  :root .header.is-scrolled, :root .theme-options, :root .back-to-top {
+    background: var(--surface-overlay);
+    backdrop-filter: blur(var(--overlay-blur)); -webkit-backdrop-filter: blur(var(--overlay-blur));
+  }
   :root .overview .contact { gap: 16px; }
   :root .contact a:not(.document-link) { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
   :root .contact .document-link, :root .course-resources .notes-placeholder {
@@ -45,15 +55,18 @@
   }
   :root .theme-options {
     border-radius: var(--radius-control); padding: 8px; box-shadow: var(--overlay-shadow);
-    background: color-mix(in srgb,var(--paper) 90%,transparent);
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   }
   :root .theme-options label { min-height: var(--control-height); }
+  :root .theme-options label:has(input:checked) {
+    color: var(--accent); background: color-mix(in srgb,var(--accent) 10%,transparent);
+  }
+  :root .theme-options input { accent-color: var(--accent); }
+  :root .theme-toggle:focus-visible, :root .copy-email:focus-visible,
+  :root .theme-options label:has(input:focus-visible) { outline-color: var(--accent); }
   :root .back-to-top {
-    width: var(--control-height); height: var(--control-height);
-    border-radius: var(--control-radius); background: var(--paper);
+    width: max(44px,var(--control-height)); height: max(44px,var(--control-height));
+    border-radius: 50%;
     box-shadow: var(--overlay-shadow); color: var(--muted);
-    backdrop-filter: none; -webkit-backdrop-filter: none;
   }
   :root .back-to-top:hover { box-shadow: var(--overlay-shadow); color: var(--accent); }
 }
@@ -66,10 +79,10 @@
 :is(.research-summary,.course-group)[data-expanded="true"] > summary > .disclosure-icon { transform: rotate(180deg); }
 @media (pointer: coarse) { :root { --control-height: 44px; } }
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
-  :root .theme-options { background: var(--paper); }
+  :root .header.is-scrolled, :root .theme-options, :root .back-to-top { background: var(--paper); }
 }
 @media (prefers-reduced-transparency: reduce) {
-  :root .theme-options { background: var(--paper); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  :root .header.is-scrolled, :root .theme-options, :root .back-to-top { background: var(--paper); backdrop-filter: none; -webkit-backdrop-filter: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   :root .contact .document-link:active, :root .course-resources a.notes-placeholder:active { transform: none; }
@@ -127,6 +140,7 @@
 }
 
 @media (max-width:680px) {
+  :root { --radius-panel: 20px; }
   :root .header { grid-template-columns: minmax(0,1fr) 44px; }
 }
 
@@ -134,6 +148,8 @@
 :root .research-summary { margin-inline: -8px; }
 :root .research-description { padding-inline: 8px; }
 :root .research-summary > summary:focus-visible { outline-offset: -2px; }
+:root .course-group > summary:focus-visible { outline-offset: -4px; }
+:root .skip { z-index: 40; }
 /* Underlined links stay lightweight, with visible pointer and keyboard feedback. */
 :root :is(.contact a:not(.document-link), .email-actions > a, footer a) {
   display: inline-flex; align-items: center; padding: 3px 6px; margin: -3px -6px;
