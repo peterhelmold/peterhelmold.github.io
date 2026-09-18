@@ -22,7 +22,8 @@
 /* All screen text uses these six roles, including responsive layouts. */
 @media screen {
   :root body { font-size: var(--type-body); }
-  :root .overview h1 { font-size: var(--type-display-large); line-height: 1.07; }
+  /* Use the palette directly: inherited animated colours lag through the intro wrappers. */
+  :root .overview h1 { font-size: var(--type-display-large); line-height: 1.07; color: var(--ink); }
   :root .thesis h3 { font-size: var(--type-display-small); line-height: 1.18; }
 }
 :root .current-section { font-size: var(--type-heading); }

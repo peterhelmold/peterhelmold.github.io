@@ -45,6 +45,8 @@ publishing asset changes.
   hovering for 650ms or holding for 500ms opens the three options.
   The menu stays open across pointer movement and selection; outside clicks,
   Escape or tabbing out dismiss it. Arrow Down focuses the selected radio.
+  Palette changes fade together over 280ms; first paint and reduced-motion
+  preferences switch immediately. Rapid toggles continue from the current colours.
 - Keep the existing 120/180/280ms press/feedback/expansion timings and
   reduced-motion support. Only interactive elements receive press feedback.
 - Links: animated underline for web/email links; border for PDFs. All page-leaving

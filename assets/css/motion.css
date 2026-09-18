@@ -15,8 +15,7 @@ html.disclosure-animating { overflow-anchor: none; }
   .overview { animation: overview-enter var(--motion-expand) var(--motion-ease) 1; }
 }
 
-/* Switch text and surfaces together: interpolating both loses contrast mid-theme.
-   Keep motion on interactive elements, never on inherited text colors. */
+/* Ordinary interactions retain their own motion outside palette changes. */
 @media screen {
   .theme-ready :is(body, .header, .thesis, .course-group, .course-row, .portrait,
     a, p, h1, h2, h3, h4, .date, .eyebrow, .notes-placeholder, .theme-toggle,
@@ -86,7 +85,9 @@ html.disclosure-animating { overflow-anchor: none; }
 .back-to-top,
 :root.theme-ready .back-to-top {
   transform: translateY(6px);
-  transition: opacity var(--motion-feedback) var(--motion-ease),
+  transition: color var(--motion-feedback) var(--motion-ease),
+    background-color var(--motion-feedback) var(--motion-ease),
+    opacity var(--motion-feedback) var(--motion-ease),
     visibility 0s linear var(--motion-feedback),
     transform var(--motion-expand) var(--motion-ease);
 }
@@ -121,4 +122,24 @@ html.disclosure-animating { overflow-anchor: none; }
 .theme-options label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 1px; }
 @media(prefers-reduced-motion:reduce) {
   .theme-options label:active { transform: none; }
+}
+
+/* Only palette changes enable this shared fade; first paint remains immediate.
+   Keep the existing movement channels available while colours settle. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.theme-transitioning,
+  :root.theme-transitioning *,
+  :root.theme-transitioning *::before,
+  :root.theme-transitioning *::after {
+    transition: background-color var(--motion-theme) var(--motion-ease),
+      color var(--motion-theme) var(--motion-ease),
+      border-color var(--motion-theme) var(--motion-ease),
+      box-shadow var(--motion-theme) var(--motion-ease),
+      fill var(--motion-theme) var(--motion-ease),
+      stroke var(--motion-theme) var(--motion-ease),
+      transform var(--motion-feedback) var(--motion-ease),
+      opacity var(--motion-feedback) var(--motion-ease),
+      width var(--motion-nav) var(--motion-ease),
+      height var(--motion-expand) var(--motion-ease) !important;
+  }
 }

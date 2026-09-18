@@ -129,9 +129,23 @@
   :root .back-to-top {
     width: max(44px,var(--control-height)); height: max(44px,var(--control-height));
     border-radius: 50%;
-    box-shadow: var(--overlay-shadow); color: var(--muted);
+    box-shadow: var(--overlay-shadow); color: var(--accent);
   }
-  :root .back-to-top:hover { box-shadow: var(--overlay-shadow); color: var(--accent); }
+  @media (hover:hover) and (pointer:fine) {
+    :root .back-to-top:hover {
+      box-shadow: var(--overlay-shadow); color: var(--ink);
+      background: color-mix(in srgb,var(--accent) 8%,var(--surface-overlay));
+    }
+  }
+  :root .back-to-top:focus-visible {
+    background: color-mix(in srgb,var(--accent) 8%,var(--surface-overlay));
+    outline: 2px solid var(--accent); outline-offset: 3px;
+  }
+  :root .back-to-top:active {
+    color: var(--ink);
+    background: color-mix(in srgb,var(--accent) 8%,var(--surface-overlay));
+  }
+  :root .back-to-top:active .ui-icon { stroke-width: 2.25; }
 }
 /* The same SVG chevron is used for every disclosure. */
 :root .research-summary > summary::after, :root .course-group > summary::after { display: none; }
@@ -229,22 +243,6 @@
 /* Shared editorial link: a short underline grows on hover/focus.
    Stroke emphasis on press avoids changing glyph widths or line wrapping. */
 .external-icon { margin-left: 6px; }
-/* Alphabetical reading order runs left to right, then down each row. */
-@media screen {
-  :root .course-group > .bachelor-course-list {
-    display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
-    grid-auto-rows: 1fr;
-    gap: 0 var(--space-group);
-  }
-  :root .bachelor-course-list > .course-row,
-  :root .bachelor-course-list > .course-row:hover {
-    grid-template-columns: minmax(0,1fr) auto; gap: 8px 12px;
-    min-height: calc(var(--control-height) + 2 * var(--space-row) + 1px);
-  }
-}
-@media screen and (max-width:680px) {
-  :root .course-group > .bachelor-course-list { grid-template-columns: minmax(0,1fr); }
-}
 :root :is(.course-title-link, .contact a:not(.document-link), .email-actions > a, footer a[rel="license"]) {
   position: relative; display: inline-flex; align-items: center;
   padding: 4px 6px 7px; margin: -4px -6px -7px;

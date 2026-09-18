@@ -1,12 +1,28 @@
 (() => {
   const root = document.documentElement;
   const system = window.matchMedia('(prefers-color-scheme: dark)');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let themeTimer;
+  const finishTheme = () => {
+    clearTimeout(themeTimer);
+    root.classList.remove('theme-transitioning');
+  };
+  reduced.addEventListener('change', finishTheme);
   let preference = 'system';
   // Each document load starts in System; manual choices last for this page only.
   let control;
   let syncSelection = () => {};
   const apply = () => {
-    root.dataset.theme = preference === 'system' ? (system.matches ? 'dark' : 'light') : preference;
+    const next = preference === 'system' ? (system.matches ? 'dark' : 'light') : preference;
+    if (next !== root.dataset.theme && root.classList.contains('theme-ready') && !reduced.matches) {
+      clearTimeout(themeTimer);
+      root.classList.add('theme-transitioning');
+      // Establish transitions before changing the palette, including rapid reversals.
+      getComputedStyle(document.body).backgroundColor;
+      const duration = parseFloat(getComputedStyle(root).getPropertyValue('--motion-expand')) || 280;
+      themeTimer = setTimeout(finishTheme, duration + 50);
+    }
+    root.dataset.theme = next;
     root.dataset.appearance = preference;
     control?.querySelector('button')?.setAttribute('aria-label', `Appearance: ${preference}. Toggle light or dark; hover, hold, or press Arrow Down for options`);
     control?.querySelectorAll('input').forEach(input => { input.checked = input.value === preference; });
@@ -46,7 +62,6 @@
     };
     let menuAnimation;
     let expanded = false;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const settle = () => {
       options.hidden = !expanded;
       menuAnimation?.cancel();
