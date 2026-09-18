@@ -1,9 +1,64 @@
 /* Shared rules: flat content panels, consistent controls, elevated overlays. */
+@media screen and (forced-colors: none) {
+  html { scrollbar-gutter: stable; scrollbar-width: thin; scrollbar-color: var(--accent) transparent; }
+  /* Older WebKit keeps a slim rounded thumb on the page canvas. */
+  html::-webkit-scrollbar { width: 9px; height: 9px; }
+  html::-webkit-scrollbar-track { background: transparent; }
+  html::-webkit-scrollbar-thumb {
+    min-height: 40px; border: 2px solid var(--paper);
+    border-radius: 999px; background: var(--accent); background-clip: padding-box;
+  }
+  html::-webkit-scrollbar-thumb:hover { background-color: var(--ink); }
+}
+@media screen and (forced-colors: none) {
+  html { scrollbar-gutter: stable; scrollbar-width: thin; scrollbar-color: var(--accent) transparent; }
+  /* Older WebKit keeps a slim rounded thumb on the page canvas. */
+  html::-webkit-scrollbar { width: 9px; height: 9px; }
+  html::-webkit-scrollbar-track { background: transparent; }
+  html::-webkit-scrollbar-thumb {
+    min-height: 40px; border: 2px solid var(--paper);
+    border-radius: 999px; background: var(--accent); background-clip: padding-box;
+  }
+  html::-webkit-scrollbar-thumb:hover { background-color: var(--ink); }
+}
+.course-collapse-footer { display: flex; justify-content: flex-end; padding: 8px 28px 20px; }
+.course-collapse {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: var(--control-height); height: var(--control-height); padding: 0;
+  font: 400 var(--type-body)/20px var(--sans); color: var(--accent);
+  background: transparent; border: 1px solid var(--line);
+  border-radius: 50%; cursor: pointer;
+  transition: background-color var(--motion-feedback) var(--motion-ease), color var(--motion-feedback) var(--motion-ease);
+}
+.course-collapse svg { transform: rotate(180deg); }
+.course-collapse:is(:hover,:focus-visible) { color: var(--ink); background: color-mix(in srgb,var(--accent) 8%,transparent); }
+.course-collapse:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.course-collapse:active { background: color-mix(in srgb,var(--accent) 12%,transparent); }
+.course-group[data-expanded="false"] .course-collapse-footer { visibility: hidden; }
+@media (max-width:680px) { .course-collapse-footer { padding-inline: 20px; } }
+@media print { .course-collapse-footer { display: none; } }
+@media screen {
+  :root .email-actions { align-items: center; }
+  :root .overview .email-actions > a[href] {
+    min-height: var(--control-height); line-height: 20px;
+    padding-block: 7px; margin-block: 0;
+  }
+  :root .overview .email-actions > a[href]::before { bottom: 5px; }
+}
+@media screen {
+  :root .email-actions { align-items: center; }
+  :root .email-actions > a {
+    min-height: var(--control-height); line-height: 20px;
+    padding-block: 7px; margin-block: 0;
+  }
+  :root .email-actions > a::before { bottom: 5px; }
+}
 :root {
   --control-height: 36px;
   --radius-panel: 24px;
   --radius-control: 12px;
-  --radius-label: 8px;
+  --radius-inset: 8px;
+  --radius-label: var(--radius-control);
   --radius-pill: 999px;
   --control-radius: var(--radius-control);
   --surface-content: #fbfaf8;
@@ -11,14 +66,22 @@
   --overlay-blur: 12px;
   --overlay-shadow: 0 8px 28px rgba(25,35,42,.12), 0 2px 6px rgba(25,35,42,.05);
 }
-:root[data-theme="dark"] { --surface-content: #20272c; --overlay-shadow: 0 8px 28px rgba(0,0,0,.3), 0 2px 6px rgba(0,0,0,.16); }
+@media screen {
+  :root[data-theme="dark"] {
+    --paper: #1c1b19;
+    --surface-content: #25231f;
+    --accent: #a4c6d5;
+    --line: #46423b;
+    --overlay-shadow: 0 8px 28px rgba(0,0,0,.3), 0 2px 6px rgba(0,0,0,.16);
+  }
+}
 .ui-icon {
   display: block; width: 16px; height: 16px; flex: 0 0 16px;
   fill: none; stroke: currentColor; stroke-width: 1.75;
   stroke-linecap: round; stroke-linejoin: round; pointer-events: none;
 }
 @media screen {
-  :root .thesis, :root .course-group, :root .portrait {
+  :root .thesis, :root .course-group, :root .portrait, :root .school-badge {
     background: var(--surface-content); box-shadow: none;
     backdrop-filter: none; -webkit-backdrop-filter: none;
   }
@@ -54,7 +117,7 @@
     box-shadow: none; color: var(--ink);
   }
   :root .theme-options {
-    border-radius: var(--radius-control); padding: 8px; box-shadow: var(--overlay-shadow);
+    border-radius: var(--radius-panel); padding: 8px; box-shadow: var(--overlay-shadow);
   }
   :root .theme-options label { min-height: var(--control-height); }
   :root .theme-options label:has(input:checked) {
@@ -146,19 +209,20 @@
 }
 
 /* Keep rounded feedback inside the animated clipping box. */
-:root .research-summary { margin-inline: -8px; }
-:root .research-description { padding-inline: 8px; }
+:root .research-summary { margin-inline: 0; }
+:root .research-summary > summary { padding-inline: 0; }
+:root .research-description { padding-inline: 0; }
 :root .research-summary > summary:focus-visible { outline-offset: -2px; }
 :root .course-group > summary:focus-visible { outline-offset: -4px; }
-:root .skip { z-index: 40; }
+:root .skip { z-index: 40; background: var(--surface-content); color: var(--ink); border-radius: var(--radius-control); }
 
-/* Four radius roles, shared across desktop and mobile. */
+/* Two base radii. Insets subtract their padding; pills are shape-specific. */
 @media screen {
   :root .thesis, :root .course-group { border-radius: var(--radius-panel); }
   :root .course-group > summary { border-radius: var(--radius-panel); }
   :root .theme-options label, :root .school-badge { border-radius: var(--radius-label); }
   :root .overview .portrait { padding: 4px; border-radius: var(--radius-control); }
-  :root .overview .portrait img { border-radius: var(--radius-label); }
+  :root .overview .portrait img { border-radius: var(--radius-inset); }
   :root .header nav a, :root .nav-indicator { border-radius: var(--radius-pill); }
 }
 
@@ -246,4 +310,138 @@
 }
 @media (prefers-reduced-motion:reduce) {
   :root :is(.document-link, .course-resources a, a:has(> .external-icon)):is(:hover,:focus-visible) > .ui-icon { transform: none; }
+}
+
+/* Research: a reading surface with a masthead rule and a quiet colophon. */
+@media screen {
+  :root .thesis { padding: clamp(24px,3.2vw,40px); }
+  :root .thesis-heading { padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  :root .thesis-heading .eyebrow { color: var(--ink); }
+  :root .research-description { padding-block: 8px 24px; }
+  :root .thesis > .subtitle { margin: 0; padding-top: 18px; border-top: 1px solid var(--line); }
+  :root .research-resources { margin-top: 12px; gap: 8px 20px; }
+  /* Inset grouped lists: outer surface, separators, trailing metadata. */
+  :root .course-group > summary { padding-block: 22px; }
+  :root .course-group > summary .disclosure-icon { flex-shrink: 0; }
+  :root .course-group > summary:is(:hover,:focus-visible) { border-radius: var(--radius-panel); }
+  :root .theme-toggle > .theme-system { display: block; grid-area: 1 / 1; opacity: 0; transform: rotate(-35deg) scale(.8); }
+  :root[data-appearance="system"] .theme-toggle > .theme-system { opacity: 1; transform: none; }
+  :root[data-appearance="system"] .theme-toggle > :is(.theme-sun,.theme-moon) { opacity: 0; }
+  :root[data-appearance="light"] .theme-toggle > .theme-sun,
+  :root[data-appearance="dark"] .theme-toggle > .theme-moon { opacity: 1; transform: none; }
+  :root[data-appearance="light"] .theme-toggle > .theme-moon,
+  :root[data-appearance="dark"] .theme-toggle > .theme-sun { opacity: 0; }
+}
+
+/* The selection travels between options while the menu stays open. */
+:root .theme-options.has-selection { isolation: isolate; }
+:root .theme-options.has-selection label { position: relative; z-index: 1; }
+:root .theme-options.has-selection label:has(input:checked) { background: transparent; }
+.theme-selection {
+  position: absolute; top: 0; left: 8px; right: 8px; z-index: 0;
+  pointer-events: none; border-radius: var(--radius-control);
+  background: color-mix(in srgb,var(--accent) 10%,transparent);
+  transition: transform var(--motion-expand) var(--motion-ease), height var(--motion-expand) var(--motion-ease);
+}
+:root .theme-toggle > .theme-system {
+  transition: opacity var(--motion-feedback) var(--motion-ease), transform var(--motion-expand) var(--motion-ease);
+}
+@media screen and (max-width:680px) {
+  :root .thesis { padding: 22px 20px; }
+  :root .thesis-heading { gap: 6px 16px; flex-wrap: wrap; display: flex; justify-content: space-between; }
+  :root .thesis-heading .date { text-align: left; }
+}
+
+/* Identity stays on one row; supporting profile information reads below it. */
+/* Degree information follows the school text with a small breathing space. */
+@media screen {
+  :root .overview #education .subtitle {
+    margin: 8px 0 0; padding-left: 46px;
+    color: var(--text-secondary); line-height: 1.6;
+  }
+}
+@media screen and (max-width:680px) {
+  :root .overview #education .subtitle { padding-left: 40px; }
+}
+@media screen {
+  :root .overview .intro { display: block; }
+  .identity-row { display: flex; align-items: center; gap: 20px; margin-bottom: 24px; }
+  :root .overview .identity-row .portrait {
+    position: static; order: 0; flex: 0 0 88px; width: 88px; margin: 0;
+  }
+  :root .overview .identity-row h1 {
+    margin: 0; padding: 0; min-height: 0;
+    font-size: var(--type-display-large); white-space: nowrap;
+  }
+}
+@media screen and (max-width:980px) {
+  .identity-row { gap: 16px; }
+  :root { --type-display-large: 42px; }
+}
+@media screen and (max-width:680px) {
+  .identity-row { gap: 14px; margin-bottom: 20px; }
+  :root .overview .identity-row .portrait { flex-basis: 64px; width: 64px; }
+  :root { --type-display-large: clamp(36px,9vw,52px); }
+}
+
+/* Press feedback on disclosures and navigation without shifting the layout. */
+:root :is(.research-summary,.course-group) > summary:active,
+:root .header nav a:active {
+  background: color-mix(in srgb,var(--accent) 10%,transparent);
+  transition-duration: var(--motion-press);
+}
+:root .header nav a { transition: background-color var(--motion-feedback) var(--motion-ease), color var(--motion-feedback) var(--motion-ease); }
+
+/* Contact labels and arrows share one centre line, with symmetric hit areas. */
+@media screen {
+  :root .contact a {
+    display: inline-flex; align-items: center;
+    min-height: var(--control-height); line-height: 20px;
+  }
+  :root .contact a:not(.document-link) {
+    padding-block: 7px; margin-block: 0;
+  }
+  :root .contact a:not(.document-link)::before { bottom: 5px; }
+}
+/* Section navigation uses a capsule, with the same feedback tint as web links. */
+@media (hover:hover) and (pointer:fine) {
+  :root .header nav a:hover {
+    color: var(--ink); background: color-mix(in srgb,var(--accent) 8%,transparent);
+    text-decoration: none;
+  }
+}
+:root .header nav a:focus-visible {
+  color: var(--ink); background: color-mix(in srgb,var(--accent) 8%,transparent);
+  outline: 2px solid var(--accent); outline-offset: 3px;
+}
+:root .header nav a:active {
+  color: var(--ink); background: color-mix(in srgb,var(--accent) 8%,transparent);
+  -webkit-text-stroke: .3px currentColor;
+}
+
+/* Contact labels and arrows share one centre line, with symmetric hit areas. */
+@media screen {
+  :root .contact a {
+    display: inline-flex; align-items: center;
+    min-height: var(--control-height); line-height: 20px;
+  }
+  :root .contact a:not(.document-link) {
+    padding-block: 7px; margin-block: 0;
+  }
+  :root .contact a:not(.document-link)::before { bottom: 5px; }
+}
+/* Section navigation uses a capsule, with the same feedback tint as web links. */
+@media (hover:hover) and (pointer:fine) {
+  :root .header nav a:hover {
+    color: var(--ink); background: color-mix(in srgb,var(--accent) 8%,transparent);
+    text-decoration: none;
+  }
+}
+:root .header nav a:focus-visible {
+  color: var(--ink); background: color-mix(in srgb,var(--accent) 8%,transparent);
+  outline: 2px solid var(--accent); outline-offset: 3px;
+}
+:root .header nav a:active {
+  color: var(--ink); background: color-mix(in srgb,var(--accent) 8%,transparent);
+  -webkit-text-stroke: .3px currentColor;
 }

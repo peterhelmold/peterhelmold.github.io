@@ -2,15 +2,15 @@
   const root = document.documentElement;
   const system = window.matchMedia('(prefers-color-scheme: dark)');
   let preference = 'system';
-  try {
-    const saved = localStorage.getItem('color-mode');
-    if (['light', 'dark', 'system'].includes(saved)) preference = saved;
-  } catch (_) { /* Preferences still work when storage is unavailable. */ }
+  // Each document load starts in System; manual choices last for this page only.
   let control;
+  let syncSelection = () => {};
   const apply = () => {
     root.dataset.theme = preference === 'system' ? (system.matches ? 'dark' : 'light') : preference;
     root.dataset.appearance = preference;
+    control?.querySelector('button')?.setAttribute('aria-label', `Appearance: ${preference}. Toggle light or dark; hover, hold, or press Arrow Down for options`);
     control?.querySelectorAll('input').forEach(input => { input.checked = input.value === preference; });
+    syncSelection();
   };
   apply();
   system.addEventListener('change', apply);
@@ -19,11 +19,23 @@
     if (!control) return;
     const button = control.querySelector('button');
     const options = control.querySelector('fieldset');
+    const selection = document.createElement('span');
+    selection.className = 'theme-selection';
+    selection.setAttribute('aria-hidden', 'true');
+    options.append(selection);
+    options.classList.add('has-selection');
+    syncSelection = () => {
+      if (options.hidden) return;
+      const label = options.querySelector('input:checked')?.closest('label');
+      if (!label) return;
+      selection.style.height = `${label.offsetHeight}px`;
+      selection.style.transform = `translateY(${label.offsetTop}px)`;
+    };
+    window.addEventListener('resize', syncSelection);
     const motion = getComputedStyle(root);
     const feedback = parseFloat(motion.getPropertyValue('--motion-feedback')) || 180;
     const expand = parseFloat(motion.getPropertyValue('--motion-expand')) || 280;
     const easing = motion.getPropertyValue('--motion-ease').trim() || 'ease-out';
-    let closeTimer;
     let hoverTimer;
     let pressTimer;
     let pressOrigin = null;
@@ -41,7 +53,6 @@
       menuAnimation = null;
     };
     const show = next => {
-      clearTimeout(closeTimer);
       if (expanded === next) return;
       expanded = next;
       const start = options.hidden
@@ -50,6 +61,7 @@
       menuAnimation?.cancel();
       menuAnimation = null;
       options.hidden = false;
+      syncSelection();
       options.inert = !expanded;
       button.setAttribute('aria-expanded', String(expanded));
       if (reduced.matches || !options.animate) { settle(); return; }
@@ -76,7 +88,6 @@
     apply();
     requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('theme-ready')));
     control.addEventListener('pointerenter', event => {
-      clearTimeout(closeTimer);
       if (event.pointerType === 'mouse') {
         clearTimeout(hoverTimer);
         hoverTimer = setTimeout(open, 650);
@@ -85,9 +96,7 @@
     control.addEventListener('pointerleave', event => {
       clearTimeout(hoverTimer);
       clearPress();
-      if (event.pointerType === 'mouse') closeTimer = setTimeout(() => {
-        if (!options.contains(document.activeElement)) close();
-      }, 180);
+      // Crossing the gap or clicking a label must not dismiss an open menu.
     });
     button.addEventListener('pointerdown', event => {
       if (event.button !== 0 || !event.isPrimary) return;
@@ -119,9 +128,7 @@
       }
       longPressed = false;
       preference = root.dataset.theme === 'dark' ? 'light' : 'dark';
-      try { localStorage.setItem('color-mode', preference); } catch (_) {}
       apply();
-      close();
     });
     button.addEventListener('keydown', event => {
       if (event.key === 'ArrowDown') {
@@ -134,15 +141,18 @@
     options.addEventListener('change', event => {
       if (!event.target.matches('input[name="appearance"]')) return;
       preference = event.target.value;
-      try { localStorage.setItem('color-mode', preference); } catch (_) {}
       apply();
     });
     document.addEventListener('pointerdown', event => { if (!control.contains(event.target)) close(); });
     control.addEventListener('keydown', event => {
       if (event.key === 'Escape') { event.preventDefault(); close(true); }
-    });
-    control.addEventListener('focusout', event => {
-      if (!control.contains(event.relatedTarget)) close();
+      if (event.key === 'Tab') {
+        // Wait for native keyboard focus movement. Pointer clicks on labels
+        // can temporarily blur the radio before its change event is delivered.
+        setTimeout(() => {
+          if (!control.contains(document.activeElement)) close();
+        }, 0);
+      }
     });
   });
 })();
