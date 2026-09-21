@@ -38,13 +38,21 @@
 :root .skills { font: 400 var(--type-body)/1.7 var(--sans); color: var(--ink); }
 :root .course-list .course-row h4, :root .skills dt { font-weight: 500; }
 :root .intro-details { font-size: var(--type-body); color: var(--text-secondary); }
-:root .research-description p { font: 400 var(--type-heading)/1.75 var(--serif); color: var(--text-secondary); max-width: 66ch; margin-bottom: 16px; text-wrap: pretty; }
-:root .research-description p:first-of-type { color: var(--ink); }
+:root .research-description .research-lead { max-width: 66ch; margin: 0 0 18px; font: 400 var(--type-heading)/1.75 var(--serif); color: var(--ink); text-wrap: pretty; }
+:root .research-description > p:not(.research-lead) { max-width: 66ch; margin: 0 0 16px; font: 400 var(--type-heading)/1.75 var(--serif); color: var(--text-secondary); text-wrap: pretty; }
+:root .research-description > p:not(.research-lead):first-child { color: var(--ink); }
+:root .research-contributions { max-width: 66ch; margin: 0; padding: 0; list-style: none; counter-reset: contribution; }
+:root .research-contributions li { display: grid; grid-template-columns: 30px minmax(0,1fr); gap: 14px; align-items: baseline; counter-increment: contribution; font: 400 var(--type-heading)/1.68 var(--serif); color: var(--text-secondary); text-wrap: pretty; }
+:root .research-contributions li::before { content: counter(contribution, decimal-leading-zero); font: 400 var(--type-meta)/1.6 var(--sans); letter-spacing: .06em; color: var(--accent); }
+:root .research-contributions li + li { margin-top: 12px; }
 :root .thesis > .subtitle { font-family: var(--serif); font-size: var(--type-body); }
 :root .thesis > .subtitle > span { font: 400 var(--type-meta)/1.6 var(--sans); color: var(--muted); margin-right: 10px; }
 :root .degree-heading small { display: block; margin-top: 4px; font: 400 var(--type-meta)/1.6 var(--sans); color: var(--muted); }
 @media screen and (max-width:680px) {
-  :root .research-description p { line-height: 1.7; }
+  :root .research-description .research-lead { line-height: 1.7; }
+  :root .research-description > p:not(.research-lead) { line-height: 1.7; }
+  :root .research-contributions li { grid-template-columns: 26px minmax(0,1fr); gap: 10px; }
+  :root .research-contributions li { line-height: 1.65; }
 }
 :root .skills dd { color: var(--text-secondary); }
 :root .subtitle { font: 400 var(--type-meta)/1.7 var(--sans); color: var(--text-secondary); }
