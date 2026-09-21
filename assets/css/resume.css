@@ -245,7 +245,7 @@ html{scroll-padding-top:var(--header-offset,110px)}
     align-items: start;
     grid-template-rows: 1fr auto;
     min-width: 0;
-    gap: 8px 24px;
+    gap: var(--space-group) 24px;
     padding: var(--space-row) 0;
     border: 0;
     border-top: 1px solid var(--surface-border);
@@ -255,7 +255,7 @@ html{scroll-padding-top:var(--header-offset,110px)}
     transform: none;
   }
   .course-list .course-row h4 { margin: 0; font-size: 14px; line-height: 1.6; }
-  .course-row > .course-resources { margin: 0; gap: 8px; justify-content: flex-end; align-self: end; }
+  .course-row > .course-resources { margin: 0; gap: 8px; justify-content: flex-start; align-self: end; }
   .research-resources { gap: 8px; margin-top: var(--space-group); }
   /* One resource component: dashed pending files, solid available links. */
   .course-resources .notes-placeholder {
@@ -290,7 +290,7 @@ html{scroll-padding-top:var(--header-offset,110px)}
   @media(max-width:980px) {
     :root .course-list > .course-row,
     :root .course-list > .course-row:hover { grid-template-columns: minmax(0,1fr); }
-    .course-row > .course-resources { justify-content: flex-end; }
+    .course-row > .course-resources { justify-content: flex-start; }
   }
   @media(max-width:680px) {
     :root { --radius-panel: 20px; --space-panel: 20px; --space-group: 20px; }
@@ -419,11 +419,6 @@ html{scroll-padding-top:var(--header-offset,110px)}
 
 @media screen and (max-width:600px) {
   .course-group > .course-list { grid-template-columns: minmax(0,1fr); }
-}
-
-/* Equal-sized undergraduate entries, with or without resources. */
-@media screen {
-  .course-group > .bachelor-course-list { grid-auto-rows: 1fr; }
 }
 
 .course-title-group { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
