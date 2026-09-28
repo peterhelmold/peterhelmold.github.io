@@ -40,8 +40,8 @@ publishing asset changes.
   background: `#fbfaf8` light / `#25231f` dark. All PDF controls (including CV
   and resource placeholders) have transparent backgrounds; linked controls
   retain the shared hover tint. Original photo/logo pixels are not recoloured.
-- Appearance starts in System on every load and refresh, and responds to OS
-  changes. Manual choices last only for the current page. Clicking toggles light/dark;
+- Appearance defaults to System, remembers the selected System/Light/Dark mode across
+  visits, and responds to OS changes while System is selected. Clicking toggles light/dark;
   hovering for 650ms or holding for 500ms opens the three options.
   The menu stays open across pointer movement and selection; outside clicks,
   Escape or tabbing out dismiss it. Arrow Down focuses the selected radio.
@@ -58,6 +58,7 @@ publishing asset changes.
   have hover/focus/press, animated height and chevrons; navigation has a sliding
   selection; theme options have a sliding selection and icon crossfade; email copy
   has a checkmark and live status; back-to-top has reveal/hover/press feedback.
+  Disclosure states and the appearance preference persist across visits.
 
 ## Final verification (2026-09-17)
 

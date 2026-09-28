@@ -3,12 +3,30 @@
   const motion = getComputedStyle(document.documentElement);
   const duration = parseFloat(motion.getPropertyValue('--motion-expand')) || 280;
   const easing = motion.getPropertyValue('--motion-ease').trim() || 'ease-out';
+  const storageKey = 'hengyi-site:disclosures';
+  const remembered = (() => {
+    try {
+      const value = JSON.parse(localStorage.getItem(storageKey) || '{}');
+      return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+    }
+    catch { return {}; }
+  })();
+  const storageId = details => details.id || details.querySelector('summary')?.textContent.trim();
+  const remember = details => {
+    const id = storageId(details);
+    if (!id) return;
+    remembered[id] = details.open;
+    try { localStorage.setItem(storageKey, JSON.stringify(remembered)); }
+    catch { /* The native disclosure still works when storage is unavailable. */ }
+  };
   const active = new Set();
   const release = details => {
     active.delete(details);
     document.documentElement.classList.toggle('disclosure-animating', active.size > 0);
   };
   document.querySelectorAll('details.course-group, details.research-summary').forEach(details => {
+    const savedState = remembered[storageId(details)];
+    if (typeof savedState === 'boolean') details.open = savedState;
     const summary = details.querySelector('summary');
     const content = summary.nextElementSibling;
     let animation = null;
@@ -81,6 +99,7 @@
       content.inert = !expanded;
       release(details);
       sync();
+      remember(details);
     };
     sync();
     summary.addEventListener('click', event => {
@@ -119,7 +138,12 @@
     });
     // Preserve native details behavior for external state changes and no-JS use.
     details.addEventListener('toggle', () => {
-      if (!animation) { expanded = details.open; content.inert = !expanded; sync(); }
+      if (!animation) {
+        expanded = details.open;
+        content.inert = !expanded;
+        sync();
+        remember(details);
+      }
     });
     window.addEventListener('resize', () => { if (animation) finish(); });
     window.addEventListener('beforeprint', finish);

@@ -2,14 +2,22 @@
   const root = document.documentElement;
   const system = window.matchMedia('(prefers-color-scheme: dark)');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const storageKey = 'hengyi-site:appearance';
+  const storedPreference = (() => {
+    try { return localStorage.getItem(storageKey); }
+    catch { return null; }
+  })();
   let themeTimer;
   const finishTheme = () => {
     clearTimeout(themeTimer);
     root.classList.remove('theme-transitioning');
   };
   reduced.addEventListener('change', finishTheme);
-  let preference = 'system';
-  // Each document load starts in System; manual choices last for this page only.
+  let preference = ['system', 'light', 'dark'].includes(storedPreference) ? storedPreference : 'system';
+  const rememberPreference = () => {
+    try { localStorage.setItem(storageKey, preference); }
+    catch { /* Keep the preference for this page when storage is unavailable. */ }
+  };
   let control;
   let syncSelection = () => {};
   const apply = () => {
@@ -143,6 +151,7 @@
       }
       longPressed = false;
       preference = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      rememberPreference();
       apply();
     });
     button.addEventListener('keydown', event => {
@@ -156,6 +165,7 @@
     options.addEventListener('change', event => {
       if (!event.target.matches('input[name="appearance"]')) return;
       preference = event.target.value;
+      rememberPreference();
       apply();
     });
     document.addEventListener('pointerdown', event => { if (!control.contains(event.target)) close(); });
