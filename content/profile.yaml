@@ -1,0 +1,43 @@
+# 首页顶部的个人信息、Skills & Interests 和页脚。
+# 直接改冒号后面的文字；网页内容用英文。改完告诉 AI「同步网站」。
+
+# 浏览器标签页上的标题，和搜索引擎显示的一句话介绍
+title: Hengyi Li | Mathematics
+description: Hengyi Li — mathematics, stochastics and Gaussian diffusions. Theses, course notes and essays.
+
+name: Hengyi Li
+# 头像换图时把新照片交给 AI，它会做成 images/profile-160.webp 和 profile-320.webp
+portrait_alt: Portrait of Hengyi Li
+
+# 名字下面的研究兴趣
+lead: My research interests lie in probability and stochastic analysis, particularly diffusion processes, convergence to equilibrium, and non-reversible sampling methods.
+
+location: Maarssen, Utrecht, Netherlands
+email: pieterhelmold@gmail.com
+
+# 简历按钮指向的 PDF。换简历时直接用同名文件覆盖它
+cv: files/Curriculum_Vitae.pdf
+
+# 简历按钮后面的外部链接，按顺序显示
+links:
+  - label: GitHub
+    url: https://github.com/peterhelmold
+  - label: LinkedIn
+    url: https://www.linkedin.com/in/peterhelmold/
+
+# Skills & Interests
+skills:
+  # 写 LaTeX 会自动排成 LaTeX 标志
+  tools: [LaTeX, Python, Git, Linux / Bash, MATLAB, Java, Hugin]
+  languages:
+    - name: Chinese
+      level: Native
+    - name: English
+      level: Language of instruction
+    - name: Japanese
+      level: Fluent
+  beyond: Literature, philosophy, history, art, and cinema.
+
+# 页脚的格言，*星号* 括起来的词会加强调
+motto: "*Ignorance,* yet knowledge. *Chaos,* yet harmony."
+copyright: © 2026 Hengyi Li

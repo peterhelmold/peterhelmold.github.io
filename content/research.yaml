@@ -1,0 +1,55 @@
+# Research 一栏的论文，从新到旧排列。
+# 数学公式照 LaTeX 写在 \( \) 里。换论文 PDF 时用同名文件覆盖，AI 会顺带重画封面。
+#
+# id         英文小写，网页内部用来区分论文，不显示
+# open       true 表示打开网页时摘要默认展开
+# abstract   摘要，每一项是一段
+# results    主要结果的编号列表，没有就删掉这一项
+# links      Read PDF、Slides 之后的外部链接
+# bibtex     Cite 按钮展开的引用
+
+- id: master
+  venue: MSc Thesis · University of Amsterdam · 2026
+  title: Accelerating Convergence to Equilibrium in Gaussian Diffusions
+  subtitle: Optimal Rates and Applications to Langevin Dynamics
+  open: true
+  pdf: files/Research/Master_Thesis.pdf
+  slides: files/Research/Master_Presentation.pdf
+  cover: images/covers/master-thesis.webp
+  abstract:
+    - Studied how noise allocation and non-reversible drift affect convergence of Ornstein–Uhlenbeck diffusions to a prescribed Gaussian equilibrium, reducing Wasserstein convergence to a spectral optimisation problem.
+  results:
+    - Gave complete proofs of the two-dimensional optimal-rate results, made the optimal reversible comparison explicit, and determined equality cases for the fixed-drift problem.
+    - Reformulated the arbitrary-dimensional optimum under \(\operatorname{tr}(\mathbf{D}) \leq \eta\) as \(\frac{\eta}{d}\lambda_{\max}(\mathbf{C}^{-1})\) for a general noise budget and constructed an explicit three-dimensional optimiser.
+    - Compared overdamped, kinetic, and three-level Langevin dynamics and extended synchronous-coupling estimates to uniformly strongly convex non-Gaussian potentials.
+  supervisor: Dr. S. G. Cox
+  links:
+    - label: UvA Repository
+      url: https://dspace.uba.uva.nl/server/api/core/bitstreams/7305e0de-9ef9-4478-8791-238a3e2ffd3a/content
+  bibtex: |-
+    @mastersthesis{li2026accelerating,
+      author = {Hengyi Li},
+      title  = {Accelerating Convergence to Equilibrium in Gaussian Diffusions: Optimal Rates and Applications to Langevin Dynamics},
+      school = {University of Amsterdam},
+      type   = {{MSc} thesis},
+      year   = {2026}
+    }
+
+- id: bachelor
+  venue: BSc Thesis · University of Liverpool · 2023
+  title: Random Walk and the Boundary Value Problems
+  pdf: files/Research/Bachelor_Thesis.pdf
+  slides: files/Research/Bachelor_Presentation.pdf
+  cover: images/covers/bachelor-thesis.webp
+  abstract:
+    - Studied simple random walks on \(\mathbb{Z}^d\), including their probability distributions and the recurrence–transience dichotomy across dimensions.
+    - Used stopping times and exit distributions to represent discrete Dirichlet solutions and prove uniqueness on finite domains and for bounded solutions under an exit-time condition.
+  supervisor: Dr. Y. Liu
+  bibtex: |-
+    @thesis{li2023random,
+      author      = {Hengyi Li},
+      title       = {Random Walk and the Boundary Value Problems},
+      institution = {University of Liverpool},
+      type        = {{BSc} thesis},
+      year        = {2023}
+    }

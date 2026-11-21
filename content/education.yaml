@@ -1,0 +1,26 @@
+# Education 一栏，从新到旧排列。
+# logo 是 images/schools/ 里 24 像素显示的小图；换校徽时把原图交给 AI，它会做成同名的 -72.webp。
+# 没有 url 的学校只显示名字，不加链接。
+
+- school: University of Amsterdam
+  url: https://www.uva.nl/en/programmes/masters/mathematics/mathematics.html
+  logo: images/schools/UvA-72.webp
+  years: 2023 – 2026
+  degree: MSc Mathematics · Stochastics
+
+- school: University of Liverpool
+  url: https://www.liverpool.ac.uk/xjtlu/courses/applied-mathematics-bsc
+  logo: images/schools/UoL-72.webp
+  years: 2019 – 2023
+  degree: BSc Applied Mathematics
+
+- school: Xi’an Jiaotong-Liverpool University
+  url: https://www.xjtlu.edu.cn/en/study/undergraduate/applied-mathematics
+  logo: images/schools/XJTLU-72.webp
+  years: 2019 – 2023
+  degree: BSc Applied Mathematics
+
+- school: Daqing Experimental Middle School
+  logo: images/schools/DQSY-72.webp
+  years: 2016 – 2019
+  degree: High School Diploma

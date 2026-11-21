@@ -1,0 +1,232 @@
+# Coursework 一栏：硕士和本科两组。学年和课程的顺序随便写，网页上自动按学年从新到旧、学年里按课程名排。
+# id 和 columns（课程较多时在宽屏上分两栏）是排版用的，一般不用改。
+#
+# 一门课可以写这些项目，用不到的删掉：
+#   title  课程名        url   课程页面链接，没有就只显示名字
+#   code   课程代码      term  学期，如 Fall 2025
+#   files  课程资料 PDF，名称可用 Essay、Report、Presentation、Notes，网页上按这个顺序显示
+# 两门连着上的课（如 Analysis I / II）写成 parts，下面各列一门。
+# 加新资料时先把 PDF 放进 files/Graduate/，再在这里写上路径；课程数目由脚本自动统计。
+- name: Master's Courses
+  id: master
+  columns: false
+  years:
+  - year: 2025–2026
+    courses:
+    - title: Forensic Probability and Statistics
+      url: https://elo.mastermath.nl/course/view.php?id=1187
+      code: 5334FOPS8Y
+      term: Fall 2025
+      files:
+        Notes: files/Graduate/Forensic_Probability_and_Statistics.pdf
+    - title: Mathematical Biology
+      url: https://elo.mastermath.nl/course/view.php?id=1151
+      code: 53348MAB8Y
+      term: Fall 2025
+      files:
+        Essay: files/Graduate/Mathematical_Biology_Essay.pdf
+        Presentation: files/Graduate/Mathematical_Biology_Presentation.pdf
+        Notes: files/Graduate/Mathematical_Biology.pdf
+
+  - year: 2024–2025
+    courses:
+    - title: Philosophy of Physics
+      url: https://studiegids.uva.nl/en/courses/2024/1/49535
+      code: 5354PHPH6Y
+      term: Fall 2024
+      files:
+        Essay: files/Graduate/Philosophy_of_Physics_Essay.pdf
+        Presentation: files/Graduate/Philosophy_of_Physics_Presentation.pdf
+        Notes: files/Graduate/Philosophy_of_Physics.pdf
+    - title: Portfolio Theory
+      url: https://studiegids.uva.nl/en/courses/2024/1/48721
+      code: 5374POTS6Y
+      term: Fall 2024
+      files:
+        Notes: files/Graduate/Portfolio_Theory.pdf
+    - title: Statistical Mechanics
+      url: https://elo.mastermath.nl/course/view.php?id=1041
+      code: 5334STME8Y
+      term: Fall 2024
+      files:
+        Essay: files/Graduate/Statistical_Mechanics_Essay.pdf
+        Presentation: files/Graduate/Statistical_Mechanics_Presentation.pdf
+        Notes: files/Graduate/Statistical_Mechanics.pdf
+
+  - year: 2023–2024
+    courses:
+    - title: Asymptotic Statistics
+      url: https://elo.mastermath.nl/course/view.php?id=909
+      code: 5374ASST8Y
+      term: Fall 2023
+      files:
+        Notes: files/Graduate/Asymptotic_Statistics.pdf
+    - title: Causality
+      url: https://elo.mastermath.nl/course/view.php?id=985
+      code: 5334CAUS8Y
+      term: Spring 2024
+      files:
+        Notes: files/Graduate/Causality.pdf
+    - title: Data-Driven Decision Making in Operations Research
+      url: https://studiegids.uva.nl/en/courses/2023/1/44389
+      code: 5334DDDM6Y
+      term: Spring 2024
+      files:
+        Report: files/Graduate/Data_Driven_Decision_Making_in_Operations_Research_Report.pdf
+        Presentation: files/Graduate/Data_Driven_Decision_Making_in_Operations_Research_Presentation.pdf
+        Notes: files/Graduate/Data_Driven_Decision_Making_in_Operations_Research.pdf
+    - title: Master Seminar in Stochastics
+      url: https://studiegids.uva.nl/en/courses/2023/1/44238
+      code: 5334MSIS6Y
+      term: 2023–2024
+      files:
+        Presentation: files/Graduate/Master_Seminar_Presentation.pdf
+    - title: Measure Theoretic Probability
+      url: https://elo.mastermath.nl/course/view.php?id=911
+      code: 5374METP8Y
+      term: Fall 2023
+      files:
+        Notes: files/Graduate/Measure_Theoretic_Probability.pdf
+    - title: Philosophy of Science
+      url: https://studiegids.uva.nl/en/courses/2023/1/44197
+      code: 5354PHSC6Y
+      term: Fall 2023
+      files:
+        Presentation: files/Graduate/Philosophy_of_Science_Presentation.pdf
+    - title: Queueing Theory
+      url: https://elo.mastermath.nl/course/view.php?id=937
+      code: 53748QUT6Y
+      term: Spring 2024
+      files:
+        Notes: files/Graduate/Queueing_Theory.pdf
+    - title: Stochastic Processes
+      url: https://elo.mastermath.nl/course/view.php?id=971
+      code: 53748STP8Y
+      term: Spring 2024
+      files:
+        Notes: files/Graduate/Stochastic_Processes.pdf
+    - title: Stochastic Simulation
+      url: https://studiegids.uva.nl/en/courses/2023/1/44366
+      code: 5334STSI6Y
+      term: Fall 2023
+      files:
+        Notes: files/Graduate/Stochastic_Simulation.pdf
+
+- name: Bachelor's Courses
+  id: bachelor
+  columns: true
+  years:
+  - year: 2022–2023
+    courses:
+    - title: Functional Analysis
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH310&psl_code=SEM2
+      code: MTH310
+      term: Spring 2023
+    - title: Geometry of Curves and Surfaces
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH315&psl_code=SEM1
+      code: MTH315
+      term: Fall 2022
+    - title: Mathematical Models of Solids and Fluids
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH308&psl_code=SEM2
+      code: MTH308
+      term: Spring 2023
+    - title: Optimisation Theory
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH318&psl_code=SEM2
+      code: MTH318
+      term: Spring 2023
+    - title: Quantum Mechanics
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=PHY301&psl_code=SEM1
+      code: PHY301
+      term: Fall 2022
+    - title: Risk Management
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH305&psl_code=SEM1
+      code: MTH305
+      term: Fall 2022
+
+  - year: 2021–2022
+    courses:
+    - title: Classical Mechanics
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH209&psl_code=SEM2
+      code: MTH209
+      term: Spring 2022
+    - title: Complex Functions
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH219&psl_code=SEM1
+      code: MTH219
+      term: Fall 2021
+    - title: Introduction to Financial Mathematics
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH202&psl_code=SEM1
+      code: MTH202
+      term: Fall 2021
+    - title: Lebesgue Measure and Integration
+      term: Summer 2022
+    - title: Metric Spaces
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH224&psl_code=SEM2
+      code: MTH224
+      term: Spring 2022
+    - title: Numerical Analysis
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH208&psl_code=SEM2
+      code: MTH208
+      term: Spring 2022
+    - title: Ordinary Differential Equations and Control
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH212&psl_code=SEM1
+      code: MTH212
+      term: Fall 2021
+    - title: Partial Differential Equations
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH210&psl_code=SEM2
+      code: MTH210
+      term: Spring 2022
+    - title: 'Vector Fields: Theory and Applications'
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH207&psl_code=SEM1
+      code: MTH207
+      term: Fall 2021
+
+  - year: 2020–2021
+    courses:
+    - title: Advanced Linear Algebra
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH107&psl_code=SEM1
+      code: MTH107
+      term: Fall 2020
+    - parts:
+      - title: Analysis I
+        url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH117&psl_code=SEM1
+        code: MTH117
+        term: Fall 2020
+      - title: Analysis II
+        url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH118&psl_code=SEM2
+        code: MTH118
+        term: Spring 2021
+    - title: Dynamic Modelling
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH108&psl_code=SEM2
+      code: MTH108
+      term: Spring 2021
+    - title: Introduction to Abstract Algebra
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH122&psl_code=SEM2
+      code: MTH122
+      term: Spring 2021
+    - title: Introduction to Probability and Statistics
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH113&psl_code=SEM1
+      code: MTH113
+      term: Fall 2020
+
+  - year: 2019–2020
+    courses:
+    - parts:
+      - title: Calculus
+        url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH013&psl_code=SEM1
+        code: MTH013
+        term: Fall 2019
+      - title: Multivariable Calculus
+        url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH008&psl_code=SEM2
+        code: MTH008
+        term: Spring 2020
+    - title: Introduction to Robotics
+      code: EEE001
+      term: Fall 2019
+    - title: Linear Algebra
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=MTH007&psl_code=SEM1
+      code: MTH007
+      term: Fall 2019
+    - title: Physics
+      url: https://modules.xjtlu.edu.cn/mod?mod_code=PHY002&psl_code=SEM2
+      code: PHY002
+      term: Spring 2020
